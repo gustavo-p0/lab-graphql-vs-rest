@@ -143,7 +143,7 @@ def main():
     st.markdown("""
     <style>
         section[data-testid="stSidebar"] { display: none; }
-        .block-container { max-width: 1200px !important; padding: 2rem 2rem !important; }
+        .block-container { max-width: 1200px !important; padding: 4rem 2rem 2rem 2rem !important; }
         h1 { margin-bottom: 0.3rem !important; }
         h2 { margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
     </style>
