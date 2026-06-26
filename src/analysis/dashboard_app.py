@@ -166,7 +166,6 @@ def main():
 
     st.markdown(f"""
     <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center;margin:8px 0 20px 0;">
-        <div style="font-size:14px;color:#aaa;margin-bottom:4px;">Conclusao do experimento</div>
         <span style="font-size:26px;font-weight:700;color:#fff;">GraphQL foi {reducao_t:.0f}% mais rapido</span>
         <span style="font-size:22px;color:#ddd;"> e </span>
         <span style="font-size:26px;font-weight:700;color:#fff;">{reducao_b:.1f}% mais eficiente</span>
