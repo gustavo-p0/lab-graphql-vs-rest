@@ -1,0 +1,35 @@
+\section{Introdução}
+
+APIs Web são o principal meio de integração entre sistemas modernos.
+Duas abordagens dominam o cenário atual: REST (Representational State Transfer)
+e GraphQL, uma linguagem de consulta desenvolvida pelo Facebook em 2015.
+Enquanto REST expõe múltiplos endpoints com estruturas fixas, GraphQL permite
+que o cliente especifique exatamente os campos desejados em uma única requisição.
+
+Este experimento investiga se GraphQL oferece vantagens mensuráveis sobre REST
+em dois aspectos críticos para aplicações web: velocidade de resposta e
+eficiência no uso da rede.
+
+\subsection{Perguntas de Pesquisa}
+
+\textbf{RQ1.} Respostas às consultas GraphQL são mais rápidas que respostas às
+consultas REST?
+
+\textbf{RQ2.} Respostas às consultas GraphQL têm tamanho menor que respostas
+às consultas REST?
+
+\subsection{Hipóteses}
+
+Para RQ1:
+\[
+H_0: \mu_{\text{GraphQL}} \ge \mu_{\text{REST}} \quad
+H_1: \mu_{\text{GraphQL}} < \mu_{\text{REST}}
+\]
+
+Para RQ2:
+\[
+H_0: \mu_{\text{GraphQL}} \ge \mu_{\text{REST}} \quad
+H_1: \mu_{\text{GraphQL}} < \mu_{\text{REST}}
+\]
+
+Nível de significância: $\alpha = 0,05$.

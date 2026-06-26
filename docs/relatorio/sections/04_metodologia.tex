@@ -1,0 +1,43 @@
+\section{Metodologia}
+
+\subsection{Desenho Experimental}
+
+Trata-se de um experimento controlado com um fator (tipo de API) em dois níveis:
+GraphQL e REST. As variáveis são:
+
+\begin{itemize}
+    \item \textbf{Independente:} tipo de API (categórica binária: GraphQL ou REST)
+    \item \textbf{Dependentes:} tempo de resposta em milissegundos (float),
+          tamanho do payload em bytes (int)
+    \item \textbf{Controladas:} mesmo servidor, mesma query semântica,
+          mesmo dataset, mesma máquina, mesma rede, mesmo horário de execução
+\end{itemize}
+
+\subsection{Objeto Experimental}
+
+Foi selecionada a API pública do GitHub, que oferece ambas as interfaces:
+REST API v3 e GraphQL API v4. A query consiste na obtenção de dados do
+repositório \texttt{facebook/react}: nome, estrelas e forks.
+
+\subsection{Procedimento}
+
+Para cada trial: (1) registrar timestamp, (2) disparar requisição,
+(3) medir tempo com \texttt{time.perf\_counter()}, (4) registrar tamanho do
+payload com \texttt{len(response.content)}. Os trials são interleaved
+(REST, GraphQL, REST, GraphQL, \dots) com intervalo de 0,5s entre eles
+para mitigar deriva temporal e rate limiting.
+
+\subsection{Critérios de Exclusão}
+
+Trials com status HTTP diferente de 200 ou timeout superior a 30s são
+excluídos da análise.
+
+\subsection{Ameaças à Validade}
+
+\begin{itemize}
+    \item \textbf{Interna:} variação de rede, cache do servidor, garbage
+          collector do Python
+    \item \textbf{Externa:} resultados podem não generalizar para outras APIs
+    \item \textbf{Construct:} "tamanho da resposta" mede o payload JSON bruto,
+          não o volume semântico de informação transmitida
+\end{itemize}

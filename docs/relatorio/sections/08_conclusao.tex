@@ -1,0 +1,36 @@
+\section{Conclusão}
+
+Este experimento controlado comparou APIs GraphQL e REST quanto ao tempo de
+resposta e tamanho do payload.
+
+\subsection{Respostas às Perguntas de Pesquisa}
+
+\textbf{RQ1 (Tempo de Resposta):} Não foi possível rejeitar $H_0$ --
+GraphQL não se mostrou significativamente mais rápido que REST no objeto
+experimental analisado.
+
+\textbf{RQ2 (Tamanho do Payload):} $H_0$ foi rejeitada -- GraphQL retorna
+payloads significativamente menores que REST, confirmando a vantagem esperada
+da consulta seletiva de campos.
+
+\subsection{Recomendação}
+
+A escolha entre GraphQL e REST deve considerar o contexto de uso:
+\begin{itemize}
+    \item Se o principal requisito é minimizar o tráfego de rede (aplicações
+          móveis, conexões limitadas), GraphQL é a melhor opção.
+    \item Se o principal requisito é velocidade de resposta em consultas
+          simples, REST pode ser mais adequado.
+    \item Em cenários com consultas complexas e largura de banda restrita,
+          GraphQL oferece o melhor equilíbrio.
+\end{itemize}
+
+\subsection{Trabalhos Futuros}
+
+Sugere-se replicar o experimento com:
+\begin{itemize}
+    \item Múltiplos objetos experimentais (diferentes APIs)
+    \item Consultas de diferentes complexidades
+    \item Medição de impacto no servidor (CPU, memória)
+    \item Análise com cache habilitado e desabilitado
+\end{itemize}
