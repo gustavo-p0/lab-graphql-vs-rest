@@ -216,8 +216,8 @@ def main():
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
         A mediana do GraphQL é 433 ms, a do REST é 608 ms.
         O REST chega a levar até 1.057 ms, enquanto o GraphQL
-        no máximo levou 624 ms. GraphQL foi mais rápido na maioria
-        das requisições.
+        no máximo levou 624 ms.
+        GraphQL foi mais rápido na maioria das requisições.
     </div>
     """, unsafe_allow_html=True)
 
@@ -250,9 +250,9 @@ def main():
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
         A mediana do GraphQL é 82 bytes, a do REST é 6.277 bytes.
         O REST chega a devolver até 6.822 bytes, enquanto o GraphQL
-        no máximo entregou 87 bytes. A diferença é enorme porque REST
-        retorna o objeto completo do repositório, GraphQL só os três
-        campos pedidos.
+        no máximo entregou 87 bytes.
+        A diferença é enorme porque REST retorna o objeto completo
+        do repositório, GraphQL só os três campos pedidos.
     </div>
     """, unsafe_allow_html=True)
 
