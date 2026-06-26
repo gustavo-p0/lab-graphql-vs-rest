@@ -122,8 +122,8 @@ def card(rotulo, valor, cor=""):
     </div>
     """
 
-
-def main():
+def fmt_p(p):
+    return f"{p:.6f}" if p >= 0.001 else "< 0,001"
     st.set_page_config(page_title="GraphQL vs REST", layout="wide", initial_sidebar_state="collapsed")
 
     df = load_data()
@@ -135,7 +135,8 @@ def main():
     gql_b = df[df["tratamento"] == "GraphQL"]["bytes"]
 
     reducao_t = (rest_t.mean() - gql_t.mean()) / rest_t.mean() * 100
-    reducao_b = (rest_b.mean() - gql_b.mean()) / rest_b.mean() * 100
+    p_t = testes["RQ1 (tempo)"][2]
+    p_b = testes["RQ2 (bytes)"][2]
 
     st.markdown("""
     <style>
@@ -175,7 +176,9 @@ def main():
     <hr style="margin:0 0 16px 0;">
     <h2 style="font-size:24px;font-weight:600;">RQ1 - Tempo de Resposta</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
-        GraphQL e mais rapido que REST? Acompanhe os numeros e o grafico abaixo.
+        GraphQL e mais rapido que REST?
+        H<sub>0</sub>: tempo medio de GraphQL &ge; REST. &nbsp;
+        H<sub>1</sub>: tempo medio de GraphQL &lt; REST.
     </p>
     """, unsafe_allow_html=True)
 
@@ -189,7 +192,7 @@ def main():
         col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
         st.markdown(f"""
         <p style="font-size:14px;color:#444;">
-            <b>Teste:</b> {n_t} | p = {p_t:.6f} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
+            <b>Teste:</b> {n_t} | p = {fmt_p(p_t)} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
         </p>
         """, unsafe_allow_html=True)
         st.markdown("""
@@ -208,7 +211,9 @@ def main():
     <hr style="margin:24px 0 16px 0;">
     <h2 style="font-size:24px;font-weight:600;">RQ2 - Tamanho do Payload</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
-        GraphQL retorna menos dados que REST? Veja a diferenca no volume de bytes.
+        GraphQL retorna menos dados que REST?
+        H<sub>0</sub>: payload medio de GraphQL &ge; REST. &nbsp;
+        H<sub>1</sub>: payload medio de GraphQL &lt; REST.
     </p>
     """, unsafe_allow_html=True)
 
@@ -222,7 +227,7 @@ def main():
         col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
         st.markdown(f"""
         <p style="font-size:14px;color:#444;">
-            <b>Teste:</b> {n_b} | p = {p_b:.6f} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
+            <b>Teste:</b> {n_b} | p = {fmt_p(p_b)} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
         </p>
         """, unsafe_allow_html=True)
         st.markdown("""
