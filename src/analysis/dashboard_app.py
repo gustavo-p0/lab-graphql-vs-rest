@@ -164,7 +164,7 @@ def main():
 
     st.markdown("""
     <div style="background:#eef2f7;border-radius:8px;padding:12px 16px;font-size:15px;color:#333;margin-bottom:20px;line-height:1.5;">
-        <b>Resumo simples:</b> Neste experimento, a tecnologia GraphQL
+        Neste experimento, a tecnologia GraphQL
         foi mais rapida e devolveu dados menores que a tecnologia REST.
         Isso foi confirmado por testes estatisticos (p &lt; 0,001),
         ou seja, a chance disso ter acontecido por acaso e menor que 0,1%.
@@ -194,10 +194,9 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            <b>O que mostra o grafico ao lado:</b> As caixas mostram o tempo que cada
-            tecnologia levou para responder. A linha no meio e a mediana (valor do meio).
-            Quanto mais baixa a caixa, mais rapido.<br>
-            <b>Leitura:</b> A caixa do GraphQL (azul) esta mais baixa que a do REST
+            As caixas mostram o tempo que cada tecnologia levou para responder.
+            A linha no meio e a mediana (valor do meio). Quanto mais baixa a caixa,
+            mais rapido. A caixa do GraphQL (azul) esta mais baixa que a do REST
             (laranja). GraphQL respondeu mais rapido na maioria das vezes.
         </div>
         """, unsafe_allow_html=True)
@@ -228,10 +227,10 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            <b>O que mostra o grafico ao lado:</b> O tamanho dos dados que cada
-            tecnologia enviou de volta. Medimos em bytes: quanto menor, menor a resposta.<br>
-            <b>Leitura:</b> A caixa do GraphQL (azul) aparece perto do zero porque os
-            dados sao muito pequenos: cerca de 80 bytes, contra 6.000 bytes do REST.
+            O tamanho dos dados que cada tecnologia enviou de volta. Medimos em
+            bytes: quanto menor, menor a resposta. A caixa do GraphQL (azul) aparece
+            perto do zero porque os dados sao muito pequenos: cerca de 80 bytes,
+            contra 6.000 bytes do REST.
         </div>
         """, unsafe_allow_html=True)
 
@@ -252,9 +251,8 @@ def main():
         st.pyplot(plot_histograma(df))
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            <b>O que mostra:</b> Quantas vezes cada tempo de resposta aconteceu.
-            Barras mais altas = mais repeticoes.<br>
-            <b>Leitura:</b> As barras azuis (GraphQL) concentram-se mais a esquerda
+            Quantas vezes cada tempo de resposta aconteceu. Barras mais altas = mais
+            repeticoes. As barras azuis (GraphQL) concentram-se mais a esquerda
             (tempos menores). As laranjas (REST) espalham-se para a direita
             (tempos maiores). Confirma que GraphQL e mais rapido.
         </div>
@@ -264,10 +262,10 @@ def main():
         st.pyplot(plot_scatter(df))
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            <b>O que mostra:</b> Cada ponto e uma requisicao. A posicao mostra a
-            ordem em que foi feita e quanto tempo levou.<br>
-            <b>Leitura:</b> Os pontos azuis (GraphQL) ficam quase sempre abaixo dos
-            laranjas (REST) do inicio ao fim. A vantagem do GraphQL foi consistente.
+            Cada ponto e uma requisicao. A posicao mostra a ordem em que foi feita
+            e quanto tempo levou. Os pontos azuis (GraphQL) ficam quase sempre
+            abaixo dos laranjas (REST) do inicio ao fim. A vantagem do GraphQL
+            foi consistente.
         </div>
         """, unsafe_allow_html=True)
 
