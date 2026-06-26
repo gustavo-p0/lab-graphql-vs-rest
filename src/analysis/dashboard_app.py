@@ -78,13 +78,13 @@ def plot_boxplot_bytes(df):
     ax_gql.set_title("GraphQL", fontweight="bold")
     ax_rest.set_ylabel("Bytes")
     ax_gql.set_ylabel("")
-    ax_rest.set_ylim(0, rest.max() * 1.15)
-    ax_gql.set_ylim(0, gql.max() * 1.15)
+    ax_rest.set_ylim(0, rest.max() * 1.3)
+    ax_gql.set_ylim(0, gql.max() * 1.3)
     med_rest = rest.median()
     med_gql = gql.median()
-    ax_rest.text(0, ax_rest.get_ylim()[1] * 0.88, f"{int(med_rest)} B",
+    ax_rest.text(0, ax_rest.get_ylim()[1] * 0.85, f"{int(med_rest)}",
                  ha="center", va="top", fontweight="bold", fontsize=12, color="#333")
-    ax_gql.text(0, ax_gql.get_ylim()[1] * 0.88, f"{int(med_gql)} B",
+    ax_gql.text(0, ax_gql.get_ylim()[1] * 0.85, f"{int(med_gql)}",
                 ha="center", va="top", fontweight="bold", fontsize=12, color="#333")
     return fig
 
@@ -159,12 +159,12 @@ def main():
 
     st.markdown("""
     <h1 style="font-size:32px;font-weight:700;margin-top:8px;margin-bottom:4px;">GraphQL vs REST &mdash; API do GitHub</h1>
-    <p style="font-size:13px;color:#888;margin:0 0 8px 0;">N=60 trials &middot; 5 repositorios</p>
+    <p style="font-size:13px;color:#888;margin:0 0 8px 0;">N=60 trials &middot; 5 repositórios</p>
     """, unsafe_allow_html=True)
 
     st.markdown(f"""
     <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center;margin:8px 0 20px 0;">
-        <span style="font-size:26px;font-weight:700;color:#fff;">GraphQL foi {reducao_t:.0f}% mais rapido</span>
+        <span style="font-size:26px;font-weight:700;color:#fff;">GraphQL foi {reducao_t:.0f}% mais rápido</span>
         <span style="font-size:22px;color:#ddd;"> e </span>
         <span style="font-size:26px;font-weight:700;color:#fff;">{reducao_b:.1f}% mais eficiente</span>
         <span style="font-size:22px;color:#ddd;"> que REST (p &lt; 0,001 em ambos)</span>
@@ -175,22 +175,22 @@ def main():
     <hr style="margin:0 0 16px 0;">
     <h2 style="font-size:24px;font-weight:600;">RQ1 - Tempo de Resposta</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
-        GraphQL e mais rapido que REST?
-        H<sub>0</sub>: tempo medio de GraphQL &ge; REST. &nbsp;
-        H<sub>1</sub>: tempo medio de GraphQL &lt; REST.
+        GraphQL é mais rápido que REST?
+        H<sub>0</sub>: tempo médio de GraphQL &ge; REST. &nbsp;
+        H<sub>1</sub>: tempo médio de GraphQL &lt; REST.
     </p>
     """, unsafe_allow_html=True)
 
     n_t, st_t, p_t = testes["RQ1 (tempo)"]
 
     col_a, col_b, col_c = st.columns(3, gap="small")
-    col_a.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms", "#3498db"), unsafe_allow_html=True)
-    col_b.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#f1c40f"), unsafe_allow_html=True)
-    col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
+    col_a.markdown(card("REST (média)", f"{rest_t.mean():.0f} ms", "#3498db"), unsafe_allow_html=True)
+    col_b.markdown(card("GraphQL (média)", f"{gql_t.mean():.0f} ms", "#f1c40f"), unsafe_allow_html=True)
+    col_c.markdown(card("Diferença", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
 
     st.markdown(f"""
     <p style="font-size:14px;color:#444;">
-        <b>Teste:</b> {n_t} | p = {fmt_p(p_t)} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
+        <b>Teste:</b> {n_t} | p = {fmt_p(p_t)} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Não"}
     </p>
     """, unsafe_allow_html=True)
 
@@ -198,10 +198,10 @@ def main():
 
     st.markdown("""
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-        A mediana do GraphQL e 433 ms, a do REST e 608 ms.
-        O REST chega a levar ate 1.057 ms, enquanto o GraphQL
-        no maximo levou 624 ms. GraphQL foi mais rapido na maioria
-        das requisicoes.
+        A mediana do GraphQL é 433 ms, a do REST é 608 ms.
+        O REST chega a levar até 1.057 ms, enquanto o GraphQL
+        no máximo levou 624 ms. GraphQL foi mais rápido na maioria
+        das requisições.
     </div>
     """, unsafe_allow_html=True)
 
@@ -210,21 +210,21 @@ def main():
     <h2 style="font-size:24px;font-weight:600;">RQ2 - Tamanho do Payload</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
         GraphQL retorna menos dados que REST?
-        H<sub>0</sub>: payload medio de GraphQL &ge; REST. &nbsp;
-        H<sub>1</sub>: payload medio de GraphQL &lt; REST.
+        H<sub>0</sub>: payload médio de GraphQL &ge; REST. &nbsp;
+        H<sub>1</sub>: payload médio de GraphQL &lt; REST.
     </p>
     """, unsafe_allow_html=True)
 
     n_b, st_b, p_b = testes["RQ2 (bytes)"]
 
     col_a, col_b, col_c = st.columns(3, gap="small")
-    col_a.markdown(card("REST (media)", f"{rest_b.mean():.0f} B", "#3498db"), unsafe_allow_html=True)
-    col_b.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#f1c40f"), unsafe_allow_html=True)
-    col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
+    col_a.markdown(card("REST (média)", f"{rest_b.mean():.0f} B", "#3498db"), unsafe_allow_html=True)
+    col_b.markdown(card("GraphQL (média)", f"{gql_b.mean():.0f} B", "#f1c40f"), unsafe_allow_html=True)
+    col_c.markdown(card("Redução", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
 
     st.markdown(f"""
     <p style="font-size:14px;color:#444;">
-        <b>Teste:</b> {n_b} | p = {fmt_p(p_b)} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
+        <b>Teste:</b> {n_b} | p = {fmt_p(p_b)} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Não"}
     </p>
     """, unsafe_allow_html=True)
 
@@ -232,19 +232,19 @@ def main():
 
     st.markdown("""
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-        A mediana do GraphQL e 82 bytes, a do REST e 6.277 bytes.
-        O REST chega a devolver ate 6.822 bytes, enquanto o GraphQL
-        no maximo entregou 87 bytes. A diferenca e enorme porque REST
-        retorna o objeto completo do repositorio, GraphQL so os tres
+        A mediana do GraphQL é 82 bytes, a do REST é 6.277 bytes.
+        O REST chega a devolver até 6.822 bytes, enquanto o GraphQL
+        no máximo entregou 87 bytes. A diferença é enorme porque REST
+        retorna o objeto completo do repositório, GraphQL só os três
         campos pedidos.
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
-    <h2 style="font-size:24px;font-weight:600;">Visualizacoes Complementares</h2>
+    <h2 style="font-size:24px;font-weight:600;">Visualizações Complementares</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
-        Graficos extras que confirmam a consistencia dos resultados.
+        Gráficos extras que confirmam a consistência dos resultados.
     </p>
     """, unsafe_allow_html=True)
 
@@ -252,18 +252,18 @@ def main():
     st.markdown("""
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
         Quantas vezes cada tempo de resposta aconteceu. Barras mais altas = mais
-        repeticoes. As barras azuis (GraphQL) concentram-se mais a esquerda
+        repetições. As barras azuis (GraphQL) concentram-se mais à esquerda
         (tempos menores). As laranjas (REST) espalham-se para a direita
-        (tempos maiores). Confirma que GraphQL e mais rapido.
+        (tempos maiores). Confirma que GraphQL é mais rápido.
     </div>
     """, unsafe_allow_html=True)
 
     st.pyplot(plot_scatter(df))
     st.markdown("""
     <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-        Cada ponto e uma requisicao. A posicao mostra a ordem em que foi feita
+        Cada ponto é uma requisição. A posição mostra a ordem em que foi feita
         e quanto tempo levou. Os pontos azuis (GraphQL) ficam quase sempre
-        abaixo dos laranjas (REST) do inicio ao fim. A vantagem do GraphQL
+        abaixo dos laranjas (REST) do início ao fim. A vantagem do GraphQL
         foi consistente.
     </div>
     """, unsafe_allow_html=True)
@@ -276,23 +276,23 @@ def main():
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
-    <h2 style="font-size:24px;font-weight:600;">Estatisticas Descritivas Completas</h2>
+    <h2 style="font-size:24px;font-weight:600;">Estatísticas Descritivas Completas</h2>
     """, unsafe_allow_html=True)
     desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
     st.dataframe(desc, use_container_width=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
-    <h2 style="font-size:24px;font-weight:600;">Limitacoes do Experimento</h2>
+    <h2 style="font-size:24px;font-weight:600;">Limitações do Experimento</h2>
     <div style="background:#fff3cd;border-radius:8px;padding:12px 16px;font-size:14px;color:#856404;line-height:1.5;">
         <ul style="margin:4px 0;padding-left:20px;">
             <li>Testamos apenas a API do GitHub. Outras APIs podem ter comportamentos diferentes.</li>
-            <li>60 trials e um numero pequeno. Mais trials aumentariam a confianca nos resultados.</li>
-            <li>Medimos somente consultas (GET/query), sem testar criacao ou alteracao de dados.</li>
+            <li>60 trials é um número pequeno. Mais trials aumentariam a confiança nos resultados.</li>
+            <li>Medimos somente consultas (GET/query), sem testar criação ou alteração de dados.</li>
             <li>O GraphQL pediu apenas 3 campos. Quanto mais campos, menor a economia de payload.</li>
-            <li>A latencia da internet varia a cada requisicao e influencia os tempos medidos.</li>
-            <li>Usamos 5 repositorios apenas. Mais repositorios dariam maior variedade de dados.</li>
-            <li>O experimento foi executado uma unica vez, em horario especifico do dia.</li>
+            <li>A latência da internet varia a cada requisição e influencia os tempos medidos.</li>
+            <li>Usamos 5 repositórios apenas. Mais repositórios dariam maior variedade de dados.</li>
+            <li>O experimento foi executado uma única vez, em horário específico do dia.</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -300,7 +300,7 @@ def main():
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
     <p style="font-size:13px;color:#999;text-align:center;">
-        GraphQL vs REST - Experimento Controlado - API do GitHub - N=60 trials - 5 repositorios
+        GraphQL vs REST - Experimento Controlado - API do GitHub - N=60 trials - 5 repositórios
     </p>
     """, unsafe_allow_html=True)
 
