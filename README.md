@@ -11,12 +11,12 @@ Disciplina: **Laboratório de Experimentação de Software**.
 ## Resultados
 
 | Métrica | REST | GraphQL | Diferença |
-|---|---|---|---|
-| Tempo médio | 953,75 ms | 424,90 ms | GraphQL **55% mais rápido** |
-| Payload médio | 6035 bytes | 82 bytes | GraphQL **98,6% menor** |
+|---|---|---|---|---|
+| Tempo médio | 651,58 ms | 462,76 ms | GraphQL **29% mais rápido** |
+| Payload médio | 6337 B | 83 B | GraphQL **98,7% menor** |
 
 **RQ1 (Tempo):** GraphQL foi significativamente mais rápido (Wilcoxon-Mann-Whitney, p < 0,001).  
-**RQ2 (Payload):** GraphQL retorna significativamente menos dados (t de Student, p < 0,001).
+**RQ2 (Payload):** GraphQL retorna significativamente menos dados (Wilcoxon-Mann-Whitney, p < 0,001).
 
 ## Estrutura
 
@@ -51,7 +51,10 @@ PYTHONPATH=. python3 src/analysis/stats.py
 # 4. Dashboard (4 gráficos)
 PYTHONPATH=. python3 src/analysis/dashboard.py
 
-# 5. Compilar PDF (requer LaTeX com pdflatex e bibtex)
+# 5. Dashboard interativo Streamlit
+PYTHONPATH=. streamlit run src/analysis/dashboard_app.py
+
+# 6. Compilar PDF (requer LaTeX com pdflatex e bibtex)
 cd docs/relatorio
 pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
@@ -68,13 +71,14 @@ pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 | `data/processed/resultado_teste.csv` | p-valor, estatística e decisão |
 | `docs/relatorio/figures/*.png` | Boxplots, histograma e scatter |
 | `docs/relatorio/relatorio_final.pdf` | Relatório final (9 páginas) |
+| `src/analysis/dashboard_app.py` | Dashboard interativo Streamlit |
 
 ## Commits
 
 | Autor | Quantidade | Escopo |
 |---|---|---|
 | Gustavo Costa | 12 | Estrutura, desenho experimental, scripts, dados, README |
-| Érica Alves | 8 | Análise estatística, dashboard, seções LaTeX, PDF |
+| Érica Alves | 9 | Análise estatística, dashboard, dashboard interativo, seções LaTeX, PDF |
 
 ## Tags
 
