@@ -73,13 +73,6 @@ pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 | `docs/relatorio/relatorio_final.pdf` | Relatório final (9 páginas) |
 | `src/analysis/dashboard_app.py` | Dashboard interativo Streamlit |
 
-## Commits
-
-| Autor | Quantidade | Escopo |
-|---|---|---|
-| Gustavo Costa | 12 | Estrutura, desenho experimental, scripts, dados, README |
-| Érica Alves | 9 | Análise estatística, dashboard, dashboard interativo, seções LaTeX, PDF |
-
 ## Tags
 
 - `v1.0-entrega` — Versão final entregue
