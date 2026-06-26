@@ -176,29 +176,28 @@ def main():
     """, unsafe_allow_html=True)
 
     n_t, st_t, p_t = testes["RQ1 (tempo)"]
-    c1, c2 = st.columns(2)
 
-    with c1:
-        col_a, col_b, col_c = st.columns(3, gap="small")
-        col_a.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms"), unsafe_allow_html=True)
-        col_b.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#2ecc71"), unsafe_allow_html=True)
-        col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
-        st.markdown(f"""
-        <p style="font-size:14px;color:#444;">
-            <b>Teste:</b> {n_t} | p = {fmt_p(p_t)} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
-        </p>
-        """, unsafe_allow_html=True)
-        st.markdown("""
-        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            A mediana do GraphQL e 433 ms, a do REST e 608 ms.
-            O REST chega a levar ate 1.057 ms, enquanto o GraphQL
-            no maximo levou 624 ms. GraphQL foi mais rapido na maioria
-            das requisicoes.
-        </div>
-        """, unsafe_allow_html=True)
+    col_a, col_b, col_c = st.columns(3, gap="small")
+    col_a.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms"), unsafe_allow_html=True)
+    col_b.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#2ecc71"), unsafe_allow_html=True)
+    col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
 
-    with c2:
-        st.pyplot(plot_boxplot_tempo(df))
+    st.markdown(f"""
+    <p style="font-size:14px;color:#444;">
+        <b>Teste:</b> {n_t} | p = {fmt_p(p_t)} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
+    </p>
+    """, unsafe_allow_html=True)
+
+    st.pyplot(plot_boxplot_tempo(df))
+
+    st.markdown("""
+    <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+        A mediana do GraphQL e 433 ms, a do REST e 608 ms.
+        O REST chega a levar ate 1.057 ms, enquanto o GraphQL
+        no maximo levou 624 ms. GraphQL foi mais rapido na maioria
+        das requisicoes.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
