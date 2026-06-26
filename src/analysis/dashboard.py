@@ -5,6 +5,8 @@ import pandas as pd
 import seaborn as sns
 
 sns.set_theme(style="whitegrid", palette="colorblind")
+palette = sns.color_palette("colorblind")
+assert len(palette) >= 4, f"Paleta colorblind possui {len(palette)} cores, necessario >= 4"
 
 CLEAN_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "data", "processed", "results_clean.csv")
 FIGURES_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "docs", "relatorio", "figures")

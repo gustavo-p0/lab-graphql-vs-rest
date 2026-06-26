@@ -27,10 +27,10 @@ def testar_hipotese(grupo_rest: pd.Series, grupo_gql: pd.Series) -> dict:
 
     if normal:
         t_stat, p_val = stats.ttest_ind(grupo_gql, grupo_rest, alternative="less")
-        teste = "t de Student (bicaudal)"
+        teste = "t de Student (unicaudal)"
     else:
         t_stat, p_val = stats.mannwhitneyu(grupo_gql, grupo_rest, alternative="less")
-        teste = "Wilcoxon-Mann-Whitney"
+        teste = "Wilcoxon-Mann-Whitney (unicaudal)"
 
     return {
         "teste": teste,

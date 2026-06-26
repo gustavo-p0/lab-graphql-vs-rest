@@ -1,6 +1,5 @@
 import csv
 import os
-import random
 import time
 from datetime import datetime, timezone
 
@@ -26,14 +25,13 @@ def run_trials(config: dict) -> list[dict]:
         raise ValueError("GH_TOKEN environment variable not set")
 
     results = []
-    trial_ids = list(range(1, n + 1))
-    random.shuffle(trial_ids)
 
-    for trial_id in trial_ids:
-        if trial_id % 2 == 1:
+    for i in range(n):
+        if i % 2 == 0:
             tratamento = "REST"
             tempo_ms, tamanho_bytes, status = fetch_rest(
                 config["rest"]["url"],
+                params=config["rest"].get("params"),
                 headers={"Authorization": f"token {gh_token}"},
             )
         else:
@@ -43,6 +41,7 @@ def run_trials(config: dict) -> list[dict]:
                 config["graphql"]["query"],
                 headers={"Authorization": f"token {gh_token}"},
             )
+        trial_id = i + 1
 
         results.append({
             "trial_id": trial_id,
