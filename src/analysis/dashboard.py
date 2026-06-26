@@ -33,15 +33,37 @@ def boxplot_tempo(df: pd.DataFrame):
 
 
 def boxplot_bytes(df: pd.DataFrame):
-    plt.figure(figsize=(8, 5))
-    ax = sns.boxplot(data=df, x="tratamento", y="bytes")
+    fig, (ax_topo, ax_base) = plt.subplots(
+        2, 1, figsize=(8, 5), sharex=True,
+        gridspec_kw={"height_ratios": [1, 3]}
+    )
+    for ax in (ax_topo, ax_base):
+        sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
+
+    ax_topo.set_ylim(6000, 6900)
+    ax_base.set_ylim(0, 200)
+
+    ax_topo.spines.bottom.set_visible(False)
+    ax_base.spines.top.set_visible(False)
+    ax_topo.xaxis.tick_top()
+    ax_topo.tick_params(labeltop=False, length=0)
+    ax_base.xaxis.tick_bottom()
+
+    d = 6
+    kwargs = dict(marker=[(-1, -d), (1, d)], markersize=8,
+                  linestyle="none", color="dimgray", mec="dimgray", mew=1.2, clip_on=False)
+    ax_topo.plot([0, 1], [0, 0], transform=ax_topo.transAxes, **kwargs)
+    ax_base.plot([0, 1], [1, 1], transform=ax_base.transAxes, **kwargs)
+
     medians = df.groupby("tratamento")["bytes"].median()
-    for i, tratamento in enumerate(["REST", "GraphQL"]):
-        offset = 200 if tratamento == "REST" else medians[tratamento] * 0.5
-        ax.text(i, medians[tratamento] + offset, f"{int(medians[tratamento])}", ha="center", va="bottom", fontweight="bold")
-    ax.set_yscale("symlog", linthresh=100)
-    plt.title("Tamanho da Resposta por Tratamento")
-    plt.ylabel("Bytes (escala simetrica log)")
+    ax_base.text(0, medians["REST"] + 50, f"{int(medians['REST'])}",
+                 ha="center", va="bottom", fontweight="bold", fontsize=12)
+    ax_base.text(1, medians["GraphQL"] + 8, f"{int(medians['GraphQL'])}",
+                 ha="center", va="bottom", fontweight="bold", fontsize=12)
+
+    fig.suptitle("Tamanho da Resposta por Tratamento", fontweight="bold", y=0.94)
+    ax_base.set_ylabel("Bytes")
+    ax_topo.set_ylabel("Bytes (zoom)")
     save_fig("boxplot_bytes.png")
 
 

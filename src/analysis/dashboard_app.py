@@ -69,17 +69,37 @@ def plot_boxplot_tempo(df):
 
 def plot_boxplot_bytes(df):
     _estilo_grafico()
-    fig, ax = plt.subplots(figsize=(7, 4))
-    sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
+    fig, (ax_topo, ax_base) = plt.subplots(
+        2, 1, figsize=(7, 5), sharex=True,
+        gridspec_kw={"height_ratios": [1, 3]}
+    )
+    for ax in (ax_topo, ax_base):
+        sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
+
+    ax_topo.set_ylim(6000, 6900)
+    ax_base.set_ylim(0, 200)
+
+    ax_topo.spines.bottom.set_visible(False)
+    ax_base.spines.top.set_visible(False)
+    ax_topo.xaxis.tick_top()
+    ax_topo.tick_params(labeltop=False, length=0)
+    ax_base.xaxis.tick_bottom()
+
+    d = 6
+    kwargs = dict(marker=[(-1, -d), (1, d)], markersize=8,
+                  linestyle="none", color="dimgray", mec="dimgray", mew=1.2, clip_on=False)
+    ax_topo.plot([0, 1], [0, 0], transform=ax_topo.transAxes, **kwargs)
+    ax_base.plot([0, 1], [1, 1], transform=ax_base.transAxes, **kwargs)
+
     medians = df.groupby("tratamento")["bytes"].median()
-    for i, t in enumerate(["REST", "GraphQL"]):
-        offset = 200 if t == "REST" else medians[t] * 0.5
-        ax.text(i, medians[t] + offset, f"{int(medians[t])} B",
-                ha="center", va="bottom", fontweight="bold", fontsize=12)
-    ax.set_yscale("symlog", linthresh=100)
-    ax.set_title("Boxplot - Tamanho do Payload", fontweight="bold")
-    ax.set_ylabel("Bytes (escala simetrica log)")
-    ax.set_xlabel("")
+    ax_base.text(0, medians["REST"] + 50, f"{int(medians['REST'])} B",
+                 ha="center", va="bottom", fontweight="bold", fontsize=12)
+    ax_base.text(1, medians["GraphQL"] + 8, f"{int(medians['GraphQL'])} B",
+                 ha="center", va="bottom", fontweight="bold", fontsize=12)
+
+    fig.suptitle("Boxplot - Tamanho do Payload", fontweight="bold", y=0.94)
+    ax_base.set_ylabel("Bytes")
+    ax_topo.set_ylabel("Bytes (zoom)")
     return fig
 
 
