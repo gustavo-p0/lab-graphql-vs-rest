@@ -1,0 +1,16 @@
+n_trials: 30
+interval_sec: 0.5
+seed: 42
+rest:
+  url: "https://api.github.com/repos/facebook/react"
+graphql:
+  url: "https://api.github.com/graphql"
+  # Precisa de token de acesso: export GH_TOKEN=seu_token
+  query: >
+    query {
+      repository(owner: "facebook", name: "react") {
+        name
+        stargazerCount
+        forkCount
+      }
+    }
