@@ -227,10 +227,14 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            O tamanho dos dados que cada tecnologia enviou de volta. Medimos em
-            bytes: quanto menor, menor a resposta. A caixa do GraphQL (azul) aparece
-            perto do zero porque os dados sao muito pequenos: cerca de 80 bytes,
-            contra 6.000 bytes do REST.
+            Medimos o tamanho dos dados que cada tecnologia devolveu. Cada caixa
+            representa a distribuicao dos valores: a linha no meio e a mediana
+            (valor central), as bordas sao o primeiro e terceiro quartis (25% e
+            75% dos dados), e os tracos mostram os valores extremos. A mediana
+            do GraphQL e 82 bytes, a do REST e 6.277 bytes. O REST chega a
+            devolver ate 6.822 bytes, enquanto o GraphQL no maximo entregou
+            87 bytes. A diferenca e enorme porque REST retorna o objeto completo
+            do repositorio, GraphQL so os tres campos pedidos.
         </div>
         """, unsafe_allow_html=True)
 
