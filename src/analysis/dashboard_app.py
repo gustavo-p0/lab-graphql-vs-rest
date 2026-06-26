@@ -176,13 +176,13 @@ def main():
     <h2 style="font-size:24px;font-weight:600;">Limitações do Experimento</h2>
     <div style="background:#eef2f7;border-radius:8px;padding:16px 20px;font-size:16px;color:#333;line-height:1.7;">
         <ul style="margin:4px 0;padding-left:20px;">
-            <li>Testamos apenas a API do GitHub. Os resultados se aplicam diretamente a este contexto, mas outras APIs podem ter comportamentos distintos.</li>
-            <li>60 trials (30 por grupo) foram suficientes para rejeitar H<sub>0</sub> com p &lt; 0,001 em ambos os testes, validando a significância estatística dos resultados.</li>
-            <li>Medimos somente consultas (GET/query), que representam a maioria do tráfego em aplicações reais. Escrita não foi testada.</li>
-            <li>O GraphQL pediu apenas 3 campos, o que maximiza a economia de payload. Quanto mais campos forem solicitados, menor será essa diferença.</li>
-            <li>A latência da internet varia a cada requisição, mas a intercalação REST/GraphQL garante que ambos os grupos foram igualmente afetados.</li>
-            <li>Usamos 5 repositórios para evitar viés de um único objeto. A variância entre repositórios foi baixa, confirmando a consistência dos dados.</li>
-            <li>O experimento foi executado em uma única sessão. O impacto disso é limitado porque as requisições foram intercaladas e o teste estatístico já considera a variabilidade amostral.</li>
+            <li>Testamos apenas a API do GitHub.</li>
+            <li>60 trials (30 por grupo) foram suficientes para p &lt; 0,001.</li>
+            <li>Medimos somente consultas (GET/query).</li>
+            <li>GraphQL pediu 3 campos — quanto mais campos, menor a economia.</li>
+            <li>Latência da internet varia, mas intercalação REST/GraphQL iguala o efeito.</li>
+            <li>5 repositórios evitaram viés de objeto único.</li>
+            <li>Execução única com requisições intercaladas; teste estatístico cobre a variabilidade.</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
