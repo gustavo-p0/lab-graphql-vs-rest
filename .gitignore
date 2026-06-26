@@ -1,0 +1,16 @@
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.DS_Store
+venv/
+.env
