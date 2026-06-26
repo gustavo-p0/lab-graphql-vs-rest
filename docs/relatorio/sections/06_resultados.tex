@@ -5,6 +5,15 @@
 A Tabela~\ref{tab:descritivas} apresenta as estatísticas descritivas do tempo
 de resposta (ms) por tratamento.
 
+O experimento utilizou 30 trials por tratamento (N = 30), totalizando 60
+requisições, com 5 repositórios distintos sorteados aleatoriamente entre os
+trials.
+
+\subsection{Estatísticas Descritivas}
+
+A Tabela~\ref{tab:descritivas} apresenta as estatísticas descritivas do tempo
+de resposta (ms) e tamanho do payload por tratamento.
+
 \begin{table}[H]
 \centering
 \caption{Estatísticas descritivas do tempo de resposta (ms)}
@@ -13,19 +22,17 @@ de resposta (ms) por tratamento.
 \toprule
 Tratamento & Média & DP & Mín. & Q1 & Mediana & Q3 & Máx. \\
 \midrule
-REST & 953,75 & 88,96 & 773,08 & 906,78 & 980,74 & 1030,92 & 1037,73 \\
-GraphQL & 424,90 & 62,82 & 336,97 & 379,13 & 414,84 & 464,93 & 518,99 \\
+REST & 651,58 & 169,57 & 481,09 & 517,88 & 608,16 & 724,14 & 1056,85 \\
+GraphQL & 462,76 & 77,93 & 338,96 & 406,94 & 432,96 & 516,35 & 624,13 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Testes de Hipóteses}
 
-O teste de Shapiro-Wilk indicou ausência de normalidade nos dados de tempo
-($p < 0,05$), portanto foi utilizado o teste de Wilcoxon-Mann-Whitney para
-RQ1. Para RQ2, os dados de bytes do GraphQL apresentaram variância zero
-(todas as respostas com 82 bytes), inviabilizando o teste de normalidade;
-foi utilizado o teste t de Student assumindo variâncias desiguais.
+O teste de Shapiro-Wilk indicou ausência de normalidade nos dados
+($p < 0,05$), portanto foi utilizado o teste de Wilcoxon-Mann-Whitney
+(unicaudal) para ambas as RQs.
 
 \begin{table}[H]
 \centering
@@ -35,8 +42,8 @@ foi utilizado o teste t de Student assumindo variâncias desiguais.
 \toprule
 RQ & Teste & Estatística & p-valor \\
 \midrule
-RQ1 (tempo) & Wilcoxon-Mann-Whitney & 0,0 & $< 0,001$ \\
-RQ2 (bytes) & t de Student & $-\infty$ & $< 0,001$ \\
+RQ1 (tempo) & Wilcoxon-Mann-Whitney & 109,0 & $< 0,001$ \\
+RQ2 (bytes) & Wilcoxon-Mann-Whitney & 0,0 & $< 0,001$ \\
 \bottomrule
 \end{tabular}
 \end{table}
