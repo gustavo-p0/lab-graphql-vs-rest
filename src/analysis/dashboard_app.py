@@ -158,7 +158,7 @@ def main():
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <h1 style="font-size:32px;font-weight:700;margin-top:8px;margin-bottom:4px;">GraphQL vs REST &mdash; API do GitHub</h1>
+    <h1 style="font-size:32px;font-weight:700;margin-top:8px;margin-bottom:4px;">GraphQL vs REST &mdash; Experimento Comparativo</h1>
     <p style="font-size:13px;color:#888;margin:0 0 8px 0;">N=60 trials &middot; 5 repositórios</p>
     """, unsafe_allow_html=True)
 
