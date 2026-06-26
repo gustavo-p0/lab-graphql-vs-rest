@@ -69,7 +69,7 @@ def plot_boxplot_tempo(df):
 
 def plot_boxplot_bytes(df):
     _estilo_grafico()
-    fig, (ax_rest, ax_gql) = plt.subplots(1, 2, figsize=(8, 4))
+    fig, (ax_rest, ax_gql) = plt.subplots(1, 2, figsize=(8, 4), gridspec_kw={"wspace": 0.4})
     rest = df[df["tratamento"] == "REST"]["bytes"]
     gql = df[df["tratamento"] == "GraphQL"]["bytes"]
     sns.boxplot(y=rest, ax=ax_rest, color=palette[0], width=0.4)
