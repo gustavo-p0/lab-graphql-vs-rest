@@ -1,16 +1,9 @@
-n_trials: 30
+n_trials: 60
 interval_sec: 0.5
-seed: 42
-rest:
-  url: "https://api.github.com/repos/facebook/react"
-graphql:
-  url: "https://api.github.com/graphql"
-  # Precisa de token de acesso: export GH_TOKEN=seu_token
-  query: >
-    query {
-      repository(owner: "facebook", name: "react") {
-        name
-        stargazerCount
-        forkCount
-      }
-    }
+graphql_url: "https://api.github.com/graphql"
+repos:
+  - facebook/react
+  - tensorflow/tensorflow
+  - nodejs/node
+  - ansible/ansible
+  - microsoft/vscode

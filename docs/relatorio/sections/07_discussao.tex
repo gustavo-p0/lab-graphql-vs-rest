@@ -17,10 +17,22 @@ especifica exatamente os campos desejados.
 
 \subsection{Ameaças à Validade}
 
-O experimento foi realizado com um único objeto experimental (GitHub API),
-limitando a generalização dos resultados (validade externa). Além disso,
-a query GraphQL utilizada é intencionalmente simples (3 campos); consultas
-mais complexas podem apresentar comportamento diferente.
+O experimento utilizou 5 repositórios do GitHub como objetos experimentais,
+o que reduz o viés de seleção em comparação com um único repositório,
+porém ainda está limitado a uma única plataforma de API (validade externa).
+APIs de outros provedores (Google, Twitter, etc.) podem apresentar
+comportamentos diferentes.
+
+A query GraphQL utilizada é intencionalmente simples (3 campos por recurso);
+consultas mais complexas, com \emph{nested queries} ou múltiplos recursos,
+podem apresentar comportamento diferente em ambas as interfaces.
+
+Recomenda-se a replicação do experimento com:
+\begin{itemize}
+    \item APIs não-GitHub (ex.: SWAPI, Spotify, Cloudflare)
+    \item Consultas com maior profundidade e cardinalidade
+    \item Medição de impacto no servidor (CPU e memória)
+\end{itemize}
 
 \subsection{Trabalhos Relacionados}
 

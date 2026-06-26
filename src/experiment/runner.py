@@ -1,5 +1,6 @@
 import csv
 import os
+import random
 import time
 from datetime import datetime, timezone
 
@@ -17,6 +18,14 @@ def load_config(path: str) -> dict:
         return yaml.safe_load(f)
 
 
+def build_rest_url(owner: str, name: str) -> str:
+    return f"https://api.github.com/repos/{owner}/{name}"
+
+
+def build_graphql_query(owner: str, name: str) -> str:
+    return f'{{ repository(owner: "{owner}", name: "{name}") {{ name stargazerCount forkCount }} }}'
+
+
 def run_trials(config: dict) -> list[dict]:
     n = config["n_trials"]
     interval = config["interval_sec"]
@@ -27,18 +36,20 @@ def run_trials(config: dict) -> list[dict]:
     results = []
 
     for i in range(n):
+        repo = random.choice(config["repos"])
+        owner, name = repo.split("/")
+
         if i % 2 == 0:
             tratamento = "REST"
             tempo_ms, tamanho_bytes, status = fetch_rest(
-                config["rest"]["url"],
-                params=config["rest"].get("params"),
+                build_rest_url(owner, name),
                 headers={"Authorization": f"token {gh_token}"},
             )
         else:
             tratamento = "GraphQL"
             tempo_ms, tamanho_bytes, status = fetch_graphql(
-                config["graphql"]["url"],
-                config["graphql"]["query"],
+                config["graphql_url"],
+                build_graphql_query(owner, name),
                 headers={"Authorization": f"token {gh_token}"},
             )
         trial_id = i + 1
