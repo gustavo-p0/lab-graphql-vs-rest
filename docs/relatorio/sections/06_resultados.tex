@@ -13,17 +13,19 @@ de resposta (ms) por tratamento.
 \toprule
 Tratamento & Média & DP & Mín. & Q1 & Mediana & Q3 & Máx. \\
 \midrule
-REST & 189,60 & 41,09 & 69,12 & 164,78 & 190,69 & 216,22 & 263,96 \\
-GraphQL & 246,25 & 48,84 & 154,52 & 208,47 & 240,23 & 273,56 & 362,70 \\
+REST & 953,75 & 88,96 & 773,08 & 906,78 & 980,74 & 1030,92 & 1037,73 \\
+GraphQL & 424,90 & 62,82 & 336,97 & 379,13 & 414,84 & 464,93 & 518,99 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Testes de Hipóteses}
 
-O teste de Shapiro-Wilk indicou normalidade nos dados ($p > 0,05$), portanto
-foi utilizado o teste t de Student para RQ1. Para RQ2, foi utilizado o teste
-de Wilcoxon-Mann-Whitney.
+O teste de Shapiro-Wilk indicou ausência de normalidade nos dados de tempo
+($p < 0,05$), portanto foi utilizado o teste de Wilcoxon-Mann-Whitney para
+RQ1. Para RQ2, os dados de bytes do GraphQL apresentaram variância zero
+(todas as respostas com 82 bytes), inviabilizando o teste de normalidade;
+foi utilizado o teste t de Student assumindo variâncias desiguais.
 
 \begin{table}[H]
 \centering
@@ -33,8 +35,8 @@ de Wilcoxon-Mann-Whitney.
 \toprule
 RQ & Teste & Estatística & p-valor \\
 \midrule
-RQ1 (tempo) & t de Student & 4,86 & $> 0,999$ \\
-RQ2 (bytes) & Wilcoxon-Mann-Whitney & 0,0 & $< 0,001$ \\
+RQ1 (tempo) & Wilcoxon-Mann-Whitney & 0,0 & $< 0,001$ \\
+RQ2 (bytes) & t de Student & $-\infty$ & $< 0,001$ \\
 \bottomrule
 \end{tabular}
 \end{table}

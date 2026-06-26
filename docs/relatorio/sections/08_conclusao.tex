@@ -5,32 +5,33 @@ resposta e tamanho do payload.
 
 \subsection{Respostas às Perguntas de Pesquisa}
 
-\textbf{RQ1 (Tempo de Resposta):} Não foi possível rejeitar $H_0$ --
-GraphQL não se mostrou significativamente mais rápido que REST no objeto
-experimental analisado.
+\textbf{RQ1 (Tempo de Resposta):} $H_0$ foi rejeitada -- GraphQL foi
+significativamente mais rápido que REST (Wilcoxon-Mann-Whitney,
+$p < 0,001$), com tempo médio 55\% menor.
 
 \textbf{RQ2 (Tamanho do Payload):} $H_0$ foi rejeitada -- GraphQL retorna
-payloads significativamente menores que REST, confirmando a vantagem esperada
-da consulta seletiva de campos.
+payloads significativamente menores que REST ($p < 0,001$), com redução
+de 98,6\% no tamanho (82 bytes contra 6035 bytes).
 
 \subsection{Recomendação}
 
-A escolha entre GraphQL e REST deve considerar o contexto de uso:
+Com base nos resultados, GraphQL é recomendado para cenários onde:
 \begin{itemize}
-    \item Se o principal requisito é minimizar o tráfego de rede (aplicações
-          móveis, conexões limitadas), GraphQL é a melhor opção.
-    \item Se o principal requisito é velocidade de resposta em consultas
-          simples, REST pode ser mais adequado.
-    \item Em cenários com consultas complexas e largura de banda restrita,
-          GraphQL oferece o melhor equilíbrio.
+    \item A eficiência de rede é crítica (aplicações móveis, APIs públicas
+          com alto volume de requisições)
+    \item O cliente precisa de flexibilidade na seleção de campos
+    \item O tempo de resposta é um requisito relevante
 \end{itemize}
+REST permanece adequado para APIs simples, endpoints estáveis e cenários
+onde o overhead de processamento de queries GraphQL não é compensado pela
+redução de dados.
 
 \subsection{Trabalhos Futuros}
 
 Sugere-se replicar o experimento com:
 \begin{itemize}
     \item Múltiplos objetos experimentais (diferentes APIs)
-    \item Consultas de diferentes complexidades
+    \item Consultas de diferentes complexidades (mais campos, \emph{nested queries})
     \item Medição de impacto no servidor (CPU, memória)
     \item Análise com cache habilitado e desabilitado
 \end{itemize}

@@ -2,24 +2,25 @@
 
 \subsection{Interpretação dos Resultados}
 
-Para RQ1, os dados indicaram que, com o objeto experimental utilizado
-(GitHub API), as requisições REST apresentaram menor tempo de resposta
-médio (189,60 ms) em comparação com GraphQL (246,25 ms). O teste estatístico
-não rejeitou $H_0$ ($p > 0,05$), indicando que não há evidência de que
-GraphQL seja mais rápido que REST. Uma possível explicação é que a query
-GraphQL exige processamento adicional no servidor para resolução dos campos.
+Para RQ1, GraphQL apresentou menor tempo de resposta médio (424,90 ms)
+em comparação com REST (953,75 ms). O teste de Wilcoxon-Mann-Whitney
+rejeitou $H_0$ ($p < 0,001$), indicando que GraphQL é significativamente
+mais rápido que REST para a query analisada. Uma possível explicação é que
+a API REST do GitHub retorna um objeto completo do repositório com dezenas
+de campos, enquanto a query GraphQL seleciona apenas três campos,
+reduzindo o tempo de serialização e transferência.
 
 Para RQ2, GraphQL apresentou payloads significativamente menores
-($p < 0,001$), confirmando a hipótese de que GraphQL retorna menos dados.
-Isso ocorre porque o GraphQL permite especificar exatamente quais campos
-desejados, enquanto REST retorna objetos completos com todos os atributos.
+($p < 0,001$), com todas as respostas em exatos 82 bytes contra 6035 bytes
+do REST. Isso confirma a vantagem fundamental do GraphQL: o cliente
+especifica exatamente os campos desejados.
 
 \subsection{Ameaças à Validade}
 
-A principal ameaça interna é o uso de dados sintéticos, que podem não
-refletir o comportamento real da API. Além disso, o experimento foi
-realizado com um único objeto experimental (GitHub API), limitando a
-generalização dos resultados (validade externa).
+O experimento foi realizado com um único objeto experimental (GitHub API),
+limitando a generalização dos resultados (validade externa). Além disso,
+a query GraphQL utilizada é intencionalmente simples (3 campos); consultas
+mais complexas podem apresentar comportamento diferente.
 
 \subsection{Trabalhos Relacionados}
 
