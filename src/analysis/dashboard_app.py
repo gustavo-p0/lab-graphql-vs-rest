@@ -173,6 +173,22 @@ def main():
 
     st.markdown("""
     <hr style="margin:0 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">Limitações do Experimento</h2>
+    <div style="background:#eef2f7;border-radius:8px;padding:12px 16px;font-size:14px;color:#333;line-height:1.5;">
+        <ul style="margin:4px 0;padding-left:20px;">
+            <li>Testamos apenas a API do GitHub. Outras APIs podem ter comportamentos diferentes.</li>
+            <li>60 trials é um número pequeno. Mais trials aumentariam a confiança nos resultados.</li>
+            <li>Medimos somente consultas (GET/query), sem testar criação ou alteração de dados.</li>
+            <li>O GraphQL pediu apenas 3 campos. Quanto mais campos, menor a economia de payload.</li>
+            <li>A latência da internet varia a cada requisição e influencia os tempos medidos.</li>
+            <li>Usamos 5 repositórios apenas. Mais repositórios dariam maior variedade de dados.</li>
+            <li>O experimento foi executado uma única vez, em horário específico do dia.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
     <h2 style="font-size:24px;font-weight:600;">RQ1 - Tempo de Resposta</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
         GraphQL é mais rápido que REST?
@@ -280,22 +296,6 @@ def main():
     """, unsafe_allow_html=True)
     desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
     st.dataframe(desc, use_container_width=True)
-
-    st.markdown("""
-    <hr style="margin:24px 0 16px 0;">
-    <h2 style="font-size:24px;font-weight:600;">Limitações do Experimento</h2>
-    <div style="background:#fff3cd;border-radius:8px;padding:12px 16px;font-size:14px;color:#856404;line-height:1.5;">
-        <ul style="margin:4px 0;padding-left:20px;">
-            <li>Testamos apenas a API do GitHub. Outras APIs podem ter comportamentos diferentes.</li>
-            <li>60 trials é um número pequeno. Mais trials aumentariam a confiança nos resultados.</li>
-            <li>Medimos somente consultas (GET/query), sem testar criação ou alteração de dados.</li>
-            <li>O GraphQL pediu apenas 3 campos. Quanto mais campos, menor a economia de payload.</li>
-            <li>A latência da internet varia a cada requisição e influencia os tempos medidos.</li>
-            <li>Usamos 5 repositórios apenas. Mais repositórios dariam maior variedade de dados.</li>
-            <li>O experimento foi executado uma única vez, em horário específico do dia.</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
