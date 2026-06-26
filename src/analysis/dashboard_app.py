@@ -189,7 +189,7 @@ def main():
     col_a, col_b, col_c = st.columns(3, gap="small")
     col_a.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms", "#3498db"), unsafe_allow_html=True)
     col_b.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#f1c40f"), unsafe_allow_html=True)
-    col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#7f8c8d"), unsafe_allow_html=True)
+    col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
 
     st.markdown(f"""
     <p style="font-size:14px;color:#444;">
@@ -223,7 +223,7 @@ def main():
     col_a, col_b, col_c = st.columns(3, gap="small")
     col_a.markdown(card("REST (media)", f"{rest_b.mean():.0f} B", "#3498db"), unsafe_allow_html=True)
     col_b.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#f1c40f"), unsafe_allow_html=True)
-    col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#7f8c8d"), unsafe_allow_html=True)
+    col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
 
     st.markdown(f"""
     <p style="font-size:14px;color:#444;">
