@@ -139,8 +139,30 @@ def main():
 
     st.markdown("""
     <style>
-        .main > .block-container { max-width: none !important; padding: 1.5rem 2rem; }
+        .main > .block-container {
+            max-width: none !important;
+            padding: 1rem 1.5rem !important;
+            overflow-x: auto !important;
+            white-space: nowrap !important;
+        }
+        .row-widget.stHorizontal {
+            display: block !important;
+            white-space: nowrap !important;
+            overflow: visible !important;
+            flex-wrap: nowrap !important;
+        }
         section[data-testid="stSidebar"] { display: none; }
+        div[data-testid="column"] {
+            display: inline-block !important;
+            vertical-align: top !important;
+            min-width: 88vw !important;
+            white-space: normal !important;
+            margin-right: 1.5rem !important;
+            padding: 0.8rem 1rem !important;
+            background: #fafafa;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
         hr { margin: 0.5rem 0 !important; }
         h1, h2, h3, h4, p { margin-bottom: 0.3rem !important; }
     </style>
@@ -150,9 +172,7 @@ def main():
     <span style="font-size:11px;color:#999;">GraphQL vs REST — Experimento Controlado — API do GitHub — N=60 trials — 5 repositorios</span>
     """, unsafe_allow_html=True)
 
-    c_conclusao, c_rq1, c_rq2, c_charts, c_brutos, c_desc = st.columns(
-        [2, 2.5, 2.5, 3, 2.5, 2], gap="medium"
-    )
+    c_conclusao, c_rq1, c_rq2, c_charts, c_brutos, c_desc = st.columns(6)
 
     with c_conclusao:
         st.markdown("""
