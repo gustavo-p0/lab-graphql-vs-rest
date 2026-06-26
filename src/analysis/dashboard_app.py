@@ -7,6 +7,7 @@ import seaborn as sns
 import streamlit as st
 
 sns.set_theme(style="whitegrid", palette="colorblind")
+palette = sns.color_palette("colorblind")
 
 CLEAN_PATH = Path(__file__).resolve().parents[2] / "data" / "processed" / "results_clean.csv"
 
