@@ -143,28 +143,19 @@ def main():
             max-width: none !important;
             padding: 1rem 1.5rem !important;
             overflow-x: auto !important;
-            white-space: nowrap !important;
-        }
-        .row-widget.stHorizontal {
-            display: block !important;
-            white-space: nowrap !important;
-            overflow: visible !important;
-            flex-wrap: nowrap !important;
         }
         section[data-testid="stSidebar"] { display: none; }
-        div[data-testid="column"] {
-            display: inline-block !important;
-            vertical-align: top !important;
+        .block-container > .stHorizontal {
+            flex-wrap: nowrap !important;
+            gap: 1.5rem;
+        }
+        .block-container > .stHorizontal > div[data-testid="column"] {
             min-width: 88vw !important;
-            white-space: normal !important;
-            margin-right: 1.5rem !important;
-            padding: 0.8rem 1rem !important;
             background: #fafafa;
             border-radius: 10px;
             border: 1px solid #eee;
+            padding: 0.8rem 1rem !important;
         }
-        hr { margin: 0.5rem 0 !important; }
-        h1, h2, h3, h4, p { margin-bottom: 0.3rem !important; }
     </style>
     """, unsafe_allow_html=True)
 
