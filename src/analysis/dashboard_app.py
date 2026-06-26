@@ -166,15 +166,6 @@ def main():
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style="background:#eef2f7;border-radius:8px;padding:12px 16px;font-size:15px;color:#333;margin-bottom:20px;line-height:1.5;">
-        Neste experimento, a tecnologia GraphQL
-        foi mais rapida e devolveu dados menores que a tecnologia REST.
-        Isso foi confirmado por testes estatisticos (p &lt; 0,001),
-        ou seja, a chance disso ter acontecido por acaso e menor que 0,1%.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
     <hr style="margin:0 0 16px 0;">
     <h2 style="font-size:24px;font-weight:600;">RQ1 - Tempo de Resposta</h2>
     <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
