@@ -62,7 +62,6 @@ def plot_boxplot_tempo(df):
     for i, t in enumerate(["REST", "GraphQL"]):
         ax.text(i, medians[t] + 20, f"{medians[t]:.0f} ms",
                 ha="center", va="bottom", fontweight="bold", fontsize=12)
-    ax.set_title("Boxplot - Tempo de Resposta", fontweight="bold")
     ax.set_ylabel("Tempo (ms)")
     ax.set_xlabel("")
     return fig
@@ -78,7 +77,7 @@ def plot_boxplot_bytes(df):
     ax_rest.set_title("REST", fontweight="bold")
     ax_gql.set_title("GraphQL", fontweight="bold")
     ax_rest.set_ylabel("Bytes")
-    ax_gql.set_ylabel("Bytes")
+    ax_gql.set_ylabel("")
     ax_rest.set_ylim(0, rest.max() * 1.15)
     ax_gql.set_ylim(0, gql.max() * 1.15)
     med_rest = rest.median()
@@ -87,7 +86,6 @@ def plot_boxplot_bytes(df):
                  ha="center", va="bottom", fontweight="bold", fontsize=12)
     ax_gql.text(0, med_gql + gql.max() * 0.03, f"{int(med_gql)} B",
                 ha="center", va="bottom", fontweight="bold", fontsize=12)
-    fig.suptitle("Boxplot - Tamanho do Payload", fontweight="bold", y=1.02)
     return fig
 
 
