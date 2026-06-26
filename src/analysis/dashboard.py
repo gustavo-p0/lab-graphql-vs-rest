@@ -34,7 +34,10 @@ def boxplot_tempo(df: pd.DataFrame):
 
 def boxplot_bytes(df: pd.DataFrame):
     plt.figure(figsize=(8, 5))
-    sns.boxplot(data=df, x="tratamento", y="bytes")
+    ax = sns.boxplot(data=df, x="tratamento", y="bytes")
+    medians = df.groupby("tratamento")["bytes"].median()
+    for i, tratamento in enumerate(["REST", "GraphQL"]):
+        ax.text(i, medians[tratamento], f"{int(medians[tratamento])}", ha="center", va="bottom", fontweight="bold")
     plt.title("Tamanho da Resposta por Tratamento")
     plt.ylabel("Bytes")
     save_fig("boxplot_bytes.png")
