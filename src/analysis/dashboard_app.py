@@ -284,6 +284,22 @@ def main():
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">Limitacoes do Experimento</h2>
+    <div style="background:#fff3cd;border-radius:8px;padding:12px 16px;font-size:14px;color:#856404;line-height:1.5;">
+        <ul style="margin:4px 0;padding-left:20px;">
+            <li>Testamos apenas a API do GitHub. Outras APIs podem ter comportamentos diferentes.</li>
+            <li>60 trials e um numero pequeno. Mais trials aumentariam a confianca nos resultados.</li>
+            <li>Medimos somente consultas (GET/query), sem testar criacao ou alteracao de dados.</li>
+            <li>O GraphQL pediu apenas 3 campos. Quanto mais campos, menor a economia de payload.</li>
+            <li>A latencia da internet varia a cada requisicao e influencia os tempos medidos.</li>
+            <li>Usamos 5 repositorios apenas. Mais repositorios dariam maior variedade de dados.</li>
+            <li>O experimento foi executado uma unica vez, em horario especifico do dia.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
     <p style="font-size:13px;color:#999;text-align:center;">
         GraphQL vs REST - Experimento Controlado - API do GitHub - N=60 trials - 5 repositorios
     </p>
