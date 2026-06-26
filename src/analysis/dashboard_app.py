@@ -69,37 +69,24 @@ def plot_boxplot_tempo(df):
 
 def plot_boxplot_bytes(df):
     _estilo_grafico()
-    fig, (ax_topo, ax_base) = plt.subplots(
-        2, 1, figsize=(7, 5), sharex=True,
-        gridspec_kw={"height_ratios": [1, 3]}
-    )
-    for ax in (ax_topo, ax_base):
-        sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
-
-    ax_topo.set_ylim(6000, 6900)
-    ax_base.set_ylim(0, 200)
-
-    ax_topo.spines.bottom.set_visible(False)
-    ax_base.spines.top.set_visible(False)
-    ax_topo.xaxis.tick_top()
-    ax_topo.tick_params(labeltop=False, length=0)
-    ax_base.xaxis.tick_bottom()
-
-    d = 6
-    kwargs = dict(marker=[(-1, -d), (1, d)], markersize=8,
-                  linestyle="none", color="dimgray", mec="dimgray", mew=1.2, clip_on=False)
-    ax_topo.plot([0, 1], [0, 0], transform=ax_topo.transAxes, **kwargs)
-    ax_base.plot([0, 1], [1, 1], transform=ax_base.transAxes, **kwargs)
-
-    medians = df.groupby("tratamento")["bytes"].median()
-    ax_base.text(0, medians["REST"] + 50, f"{int(medians['REST'])} B",
+    fig, (ax_rest, ax_gql) = plt.subplots(1, 2, figsize=(8, 4))
+    rest = df[df["tratamento"] == "REST"]["bytes"]
+    gql = df[df["tratamento"] == "GraphQL"]["bytes"]
+    sns.boxplot(y=rest, ax=ax_rest, color=palette[0], width=0.4)
+    sns.boxplot(y=gql, ax=ax_gql, color=palette[1], width=0.4)
+    ax_rest.set_title("REST", fontweight="bold")
+    ax_gql.set_title("GraphQL", fontweight="bold")
+    ax_rest.set_ylabel("Bytes")
+    ax_gql.set_ylabel("Bytes")
+    ax_rest.set_ylim(0, rest.max() * 1.15)
+    ax_gql.set_ylim(0, gql.max() * 1.15)
+    med_rest = rest.median()
+    med_gql = gql.median()
+    ax_rest.text(0, med_rest + rest.max() * 0.03, f"{int(med_rest)} B",
                  ha="center", va="bottom", fontweight="bold", fontsize=12)
-    ax_base.text(1, medians["GraphQL"] + 8, f"{int(medians['GraphQL'])} B",
-                 ha="center", va="bottom", fontweight="bold", fontsize=12)
-
-    fig.suptitle("Boxplot - Tamanho do Payload", fontweight="bold", y=0.94)
-    ax_base.set_ylabel("Bytes")
-    ax_topo.set_ylabel("Bytes (zoom)")
+    ax_gql.text(0, med_gql + gql.max() * 0.03, f"{int(med_gql)} B",
+                ha="center", va="bottom", fontweight="bold", fontsize=12)
+    fig.suptitle("Boxplot - Tamanho do Payload", fontweight="bold", y=1.02)
     return fig
 
 
