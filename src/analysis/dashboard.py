@@ -37,9 +37,11 @@ def boxplot_bytes(df: pd.DataFrame):
     ax = sns.boxplot(data=df, x="tratamento", y="bytes")
     medians = df.groupby("tratamento")["bytes"].median()
     for i, tratamento in enumerate(["REST", "GraphQL"]):
-        ax.text(i, medians[tratamento], f"{int(medians[tratamento])}", ha="center", va="bottom", fontweight="bold")
+        offset = 200 if tratamento == "REST" else medians[tratamento] * 0.5
+        ax.text(i, medians[tratamento] + offset, f"{int(medians[tratamento])}", ha="center", va="bottom", fontweight="bold")
+    ax.set_yscale("symlog", linthresh=100)
     plt.title("Tamanho da Resposta por Tratamento")
-    plt.ylabel("Bytes")
+    plt.ylabel("Bytes (escala simetrica log)")
     save_fig("boxplot_bytes.png")
 
 

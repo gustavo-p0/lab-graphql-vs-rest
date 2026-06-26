@@ -73,10 +73,12 @@ def plot_boxplot_bytes(df):
     sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
     medians = df.groupby("tratamento")["bytes"].median()
     for i, t in enumerate(["REST", "GraphQL"]):
-        ax.text(i, medians[t] + 150, f"{int(medians[t])} B",
+        offset = 200 if t == "REST" else medians[t] * 0.5
+        ax.text(i, medians[t] + offset, f"{int(medians[t])} B",
                 ha="center", va="bottom", fontweight="bold", fontsize=12)
+    ax.set_yscale("symlog", linthresh=100)
     ax.set_title("Boxplot - Tamanho do Payload", fontweight="bold")
-    ax.set_ylabel("Bytes")
+    ax.set_ylabel("Bytes (escala simetrica log)")
     ax.set_xlabel("")
     return fig
 
