@@ -139,156 +139,157 @@ def main():
 
     st.markdown("""
     <style>
-        .main > .block-container {
-            max-width: none !important;
-            padding: 1rem 1.5rem !important;
-            overflow-x: auto !important;
-        }
         section[data-testid="stSidebar"] { display: none; }
-        .block-container > .stHorizontal {
-            flex-wrap: nowrap !important;
-            gap: 1.5rem;
-        }
-        .block-container > .stHorizontal > div[data-testid="column"] {
-            min-width: 88vw !important;
-            background: #fafafa;
-            border-radius: 10px;
-            border: 1px solid #eee;
-            padding: 0.8rem 1rem !important;
-        }
+        .block-container { max-width: 1200px !important; padding: 2rem 2rem !important; }
+        h1 { margin-bottom: 0.3rem !important; }
+        h2 { margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
     </style>
     """, unsafe_allow_html=True)
 
+    st.markdown('<span style="font-size:12px;color:#999;">GraphQL vs REST - Experimento Controlado - API do GitHub - N=60 trials - 5 repositorios</span>', unsafe_allow_html=True)
+
     st.markdown("""
-    <span style="font-size:11px;color:#999;">GraphQL vs REST — Experimento Controlado — API do GitHub — N=60 trials — 5 repositorios</span>
+    <h1 style="font-size:32px;font-weight:700;margin-top:8px;margin-bottom:4px;">GraphQL vs REST</h1>
     """, unsafe_allow_html=True)
 
-    c_conclusao, c_rq1, c_rq2, c_charts, c_brutos, c_desc = st.columns(6)
+    st.markdown(f"""
+    <div style="background:#1a1a2e;border-radius:10px;padding:20px;text-align:center;margin:8px 0 20px 0;">
+        <div style="font-size:14px;color:#aaa;margin-bottom:4px;">Conclusao do experimento</div>
+        <span style="font-size:26px;font-weight:700;color:#fff;">GraphQL foi {reducao_t:.0f}% mais rapido</span>
+        <span style="font-size:22px;color:#ddd;"> e </span>
+        <span style="font-size:26px;font-weight:700;color:#fff;">{reducao_b:.1f}% mais eficiente</span>
+        <span style="font-size:22px;color:#ddd;"> que REST (p &lt; 0,001 em ambos)</span>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with c_conclusao:
-        st.markdown("""
-        <div style="margin-top:24px;">
-            <h1 style="font-size:28px;font-weight:700;margin-bottom:4px;">GraphQL vs REST</h1>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown(f"""
-        <div style="background:#1a1a2e;border-radius:10px;padding:18px;text-align:center;">
-            <div style="font-size:13px;color:#aaa;margin-bottom:4px;">Conclusao</div>
-            <div style="font-size:22px;font-weight:700;color:#fff;">
-                {reducao_t:.0f}% mais rapido<br>
-                <span style="font-size:14px;color:#ccc;">e</span><br>
-                {reducao_b:.1f}% mais eficiente
-            </div>
-            <div style="font-size:13px;color:#aaa;margin-top:4px;">p &lt; 0,001 em ambos</div>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown("""
-        <div style="background:#eef2f7;border-radius:6px;padding:10px;font-size:14px;color:#333;margin-top:6px;line-height:1.5;">
-            <b>Resumo simples:</b> Neste experimento, a tecnologia GraphQL
-            foi mais rapida e devolveu dados menores que a tecnologia REST.
-            Isso foi confirmado por testes estatisticos (p &lt; 0,001),
-            ou seja, a chance disso ter acontecido por acaso e menor que
-            0,1%.
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style="background:#eef2f7;border-radius:8px;padding:12px 16px;font-size:15px;color:#333;margin-bottom:20px;line-height:1.5;">
+        <b>Resumo simples:</b> Neste experimento, a tecnologia GraphQL
+        foi mais rapida e devolveu dados menores que a tecnologia REST.
+        Isso foi confirmado por testes estatisticos (p &lt; 0,001),
+        ou seja, a chance disso ter acontecido por acaso e menor que 0,1%.
+    </div>
+    """, unsafe_allow_html=True)
 
-    with c_rq1:
-        n_t, st_t, p_t = testes["RQ1 (tempo)"]
-        st.markdown("""
-        <div style="margin-top:16px;">
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:8px;">RQ1 — Tempo de Resposta</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        c1, c2, c3 = st.columns(3, gap="small")
-        c1.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms"), unsafe_allow_html=True)
-        c2.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#2ecc71"), unsafe_allow_html=True)
-        c3.markdown(card("Reducao", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
+    st.markdown("""
+    <hr style="margin:0 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">RQ1 - Tempo de Resposta</h2>
+    <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
+        GraphQL e mais rapido que REST? Acompanhe os numeros e o grafico abaixo.
+    </p>
+    """, unsafe_allow_html=True)
+
+    n_t, st_t, p_t = testes["RQ1 (tempo)"]
+    c1, c2 = st.columns(2)
+
+    with c1:
+        col_a, col_b, col_c = st.columns(3, gap="small")
+        col_a.markdown(card("REST (media)", f"{rest_t.mean():.0f} ms"), unsafe_allow_html=True)
+        col_b.markdown(card("GraphQL (media)", f"{gql_t.mean():.0f} ms", "#2ecc71"), unsafe_allow_html=True)
+        col_c.markdown(card("Diferenca", f"-{reducao_t:.0f}%", "#2ecc71"), unsafe_allow_html=True)
         st.markdown(f"""
-        <p style="font-size:13px;color:#444;margin:4px 0;">
+        <p style="font-size:14px;color:#444;">
             <b>Teste:</b> {n_t} | p = {p_t:.6f} | Rejeita H<sub>0</sub>: {"Sim" if p_t < 0.05 else "Nao"}
         </p>
         """, unsafe_allow_html=True)
-        st.pyplot(plot_boxplot_tempo(df))
         st.markdown("""
-        <div style="background:#eef2f7;border-radius:6px;padding:8px 10px;font-size:13px;color:#333;margin-top:2px;line-height:1.4;">
-            <b>O que mostra:</b> As caixas mostram o tempo que cada tecnologia levou
-            para responder. A linha no meio da caixa e a mediana (valor do meio).
+        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+            <b>O que mostra o grafico ao lado:</b> As caixas mostram o tempo que cada
+            tecnologia levou para responder. A linha no meio e a mediana (valor do meio).
             Quanto mais baixa a caixa, mais rapido.<br>
-            <b>Leitura:</b> GraphQL (azul) teve caixa mais baixa que REST (laranja).
-            Significa que GraphQL respondeu mais rapido na maioria das vezes.
+            <b>Leitura:</b> A caixa do GraphQL (azul) esta mais baixa que a do REST
+            (laranja). GraphQL respondeu mais rapido na maioria das vezes.
         </div>
         """, unsafe_allow_html=True)
 
-    with c_rq2:
-        n_b, st_b, p_b = testes["RQ2 (bytes)"]
-        st.markdown("""
-        <div style="margin-top:16px;">
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:8px;">RQ2 — Tamanho do Payload</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        c1, c2, c3 = st.columns(3, gap="small")
-        c1.markdown(card("REST (media)", f"{rest_b.mean():.0f} B"), unsafe_allow_html=True)
-        c2.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#2ecc71"), unsafe_allow_html=True)
-        c3.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
+    with c2:
+        st.pyplot(plot_boxplot_tempo(df))
+
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">RQ2 - Tamanho do Payload</h2>
+    <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
+        GraphQL retorna menos dados que REST? Veja a diferenca no volume de bytes.
+    </p>
+    """, unsafe_allow_html=True)
+
+    n_b, st_b, p_b = testes["RQ2 (bytes)"]
+    c1, c2 = st.columns(2)
+
+    with c1:
+        col_a, col_b, col_c = st.columns(3, gap="small")
+        col_a.markdown(card("REST (media)", f"{rest_b.mean():.0f} B"), unsafe_allow_html=True)
+        col_b.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#2ecc71"), unsafe_allow_html=True)
+        col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
         st.markdown(f"""
-        <p style="font-size:13px;color:#444;margin:4px 0;">
+        <p style="font-size:14px;color:#444;">
             <b>Teste:</b> {n_b} | p = {p_b:.6f} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
         </p>
         """, unsafe_allow_html=True)
-        st.pyplot(plot_boxplot_bytes(df))
         st.markdown("""
-        <div style="background:#eef2f7;border-radius:6px;padding:8px 10px;font-size:13px;color:#333;margin-top:2px;line-height:1.4;">
-            <b>O que mostra:</b> O tamanho dos dados que cada tecnologia enviou
-            de volta. Medimos em bytes (quanto menor o numero, menor a resposta).<br>
-            <b>Leitura:</b> A caixa do GraphQL (azul) aparece praticamente no zero
-            porque os dados sao muito pequenos: cerca de 80 bytes, contra 6.000
-            bytes do REST. Isso e uma grande diferenca.
+        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+            <b>O que mostra o grafico ao lado:</b> O tamanho dos dados que cada
+            tecnologia enviou de volta. Medimos em bytes: quanto menor, menor a resposta.<br>
+            <b>Leitura:</b> A caixa do GraphQL (azul) aparece perto do zero porque os
+            dados sao muito pequenos: cerca de 80 bytes, contra 6.000 bytes do REST.
         </div>
         """, unsafe_allow_html=True)
 
-    with c_charts:
-        st.markdown("""
-        <div style="margin-top:16px;">
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:8px;">Complementares</h2>
-        </div>
-        """, unsafe_allow_html=True)
+    with c2:
+        st.pyplot(plot_boxplot_bytes(df))
+
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">Visualizacoes Complementares</h2>
+    <p style="font-size:15px;color:#555;margin:2px 0 12px 0;">
+        Graficos extras que confirmam a consistencia dos resultados.
+    </p>
+    """, unsafe_allow_html=True)
+
+    g1, g2 = st.columns(2)
+
+    with g1:
         st.pyplot(plot_histograma(df))
         st.markdown("""
-        <div style="background:#eef2f7;border-radius:6px;padding:8px 10px;font-size:13px;color:#333;margin-top:2px;line-height:1.4;">
+        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
             <b>O que mostra:</b> Quantas vezes cada tempo de resposta aconteceu.
-            Barras mais altas = mais repeticoes daquele valor.<br>
-            <b>Leitura:</b> As barras do GraphQL (azul) concentram-se mais a
-            esquerda (tempos menores). As do REST (laranja) espalham-se para a
-            direita (tempos maiores). Isso confirma que GraphQL e mais rapido.
+            Barras mais altas = mais repeticoes.<br>
+            <b>Leitura:</b> As barras azuis (GraphQL) concentram-se mais a esquerda
+            (tempos menores). As laranjas (REST) espalham-se para a direita
+            (tempos maiores). Confirma que GraphQL e mais rapido.
         </div>
         """, unsafe_allow_html=True)
+
+    with g2:
         st.pyplot(plot_scatter(df))
         st.markdown("""
-        <div style="background:#eef2f7;border-radius:6px;padding:8px 10px;font-size:13px;color:#333;margin-top:2px;line-height:1.4;">
-            <b>O que mostra:</b> Cada ponto e uma requisicao. A posicao mostra
-            em que ordem ela foi feita e quanto tempo levou.<br>
-            <b>Leitura:</b> Os pontos azuis (GraphQL) ficam quase sempre abaixo
-            dos laranjas (REST) durante todo o experimento. Isso mostra que a
-            vantagem do GraphQL foi consistente do inicio ao fim.
+        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+            <b>O que mostra:</b> Cada ponto e uma requisicao. A posicao mostra a
+            ordem em que foi feita e quanto tempo levou.<br>
+            <b>Leitura:</b> Os pontos azuis (GraphQL) ficam quase sempre abaixo dos
+            laranjas (REST) do inicio ao fim. A vantagem do GraphQL foi consistente.
         </div>
         """, unsafe_allow_html=True)
 
-    with c_brutos:
-        st.markdown("""
-        <div style="margin-top:16px;">
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:8px;">Dados Brutos</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        st.dataframe(df, use_container_width=True, hide_index=True, height=520)
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">Dados Brutos</h2>
+    """, unsafe_allow_html=True)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
-    with c_desc:
-        st.markdown("""
-        <div style="margin-top:16px;">
-            <h2 style="font-size:20px;font-weight:600;margin-bottom:8px;">Descritivas</h2>
-        </div>
-        """, unsafe_allow_html=True)
-        desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
-        st.dataframe(desc, use_container_width=True, height=520)
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:24px;font-weight:600;">Estatisticas Descritivas Completas</h2>
+    """, unsafe_allow_html=True)
+    desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
+    st.dataframe(desc, use_container_width=True)
+
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <p style="font-size:13px;color:#999;text-align:center;">
+        GraphQL vs REST - Experimento Controlado - API do GitHub - N=60 trials - 5 repositorios
+    </p>
+    """, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
