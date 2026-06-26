@@ -1,27 +1,38 @@
 # GraphQL vs REST — Experimento Controlado
 
+Comparação entre APIs GraphQL e REST quanto a tempo de resposta e tamanho de payload.
+Disciplina: **Laboratório de Experimentação de Software**.
+
 ## Autores
 
 - Gustavo Pimentel Carvalho Costa
 - Érica Alves dos Santos
 
-## Disciplina
+## Resultados
 
-Laboratório de Experimentação de Software
+| Métrica | REST | GraphQL | Diferença |
+|---|---|---|---|
+| Tempo médio | 953,75 ms | 424,90 ms | GraphQL **55% mais rápido** |
+| Payload médio | 6035 bytes | 82 bytes | GraphQL **98,6% menor** |
+
+**RQ1 (Tempo):** GraphQL foi significativamente mais rápido (Wilcoxon-Mann-Whitney, p < 0,001).  
+**RQ2 (Payload):** GraphQL retorna significativamente menos dados (t de Student, p < 0,001).
 
 ## Estrutura
 
 ```
-src/                     # Scripts de coleta e análise
-  api/                   # Clientes REST e GraphQL
-  experiment/            # Runner e configuração
-  analysis/              # Estatística e dashboard
-data/                    # Resultados brutos e processados
-  raw/                   # CSVs brutos do experimento
-  processed/             # CSVs limpos e resultados dos testes
-docs/relatorio/          # Relatório LaTeX e PDF final
-  sections/              # Seções individuais do relatório
-  figures/               # Gráficos gerados (PNG 300 DPI)
+src/
+  api/             Clientes REST (rest_client.py) e GraphQL (graphql_client.py)
+  experiment/      Runner (runner.py) e configuração (config.yaml)
+  analysis/        Estatística (stats.py), dashboard (dashboard.py), requirements.txt
+data/
+  raw/             CSVs brutos do experimento + log de execução
+  processed/       CSVs limpos e resultado dos testes
+docs/relatorio/
+  sections/        9 seções LaTeX
+  figures/         4 gráficos PNG 300 DPI
+  main.tex         Documento principal
+  relatorio_final.pdf  PDF compilado
 ```
 
 ## Reprodução
@@ -30,30 +41,41 @@ docs/relatorio/          # Relatório LaTeX e PDF final
 # 1. Instalar dependências
 pip install -r src/analysis/requirements.txt
 
-# 2. Executar coleta (requer GH_TOKEN)
+# 2. Coleta de dados (requer token GitHub com acesso a repositórios públicos)
 export GH_TOKEN=seu_token_github
-python src/experiment/runner.py
+PYTHONPATH=. python3 src/experiment/runner.py
 
 # 3. Análise estatística
-python src/analysis/stats.py
+PYTHONPATH=. python3 src/analysis/stats.py
 
-# 4. Dashboard de gráficos
-python src/analysis/dashboard.py
+# 4. Dashboard (4 gráficos)
+PYTHONPATH=. python3 src/analysis/dashboard.py
 
-# 5. Compilar relatório (requer LaTeX)
+# 5. Compilar PDF (requer LaTeX com pdflatex e bibtex)
 cd docs/relatorio
 pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
 
-## Resultado
+> Nota: `PYTHONPATH=.` é necessário no Python 3.9 para resolver imports relativos ao projeto.
 
-- **PDF final:** `docs/relatorio/relatorio_final.pdf`
-- **Dados brutos:** `data/raw/results_*.csv`
-- **Dados limpos:** `data/processed/results_clean.csv`
-- **Testes estatísticos:** `data/processed/resultado_teste.csv`
-- **Gráficos:** `docs/relatorio/figures/*.png`
+## Artefatos
 
-## Perguntas de Pesquisa
+| Arquivo | Descrição |
+|---|---|
+| `data/raw/results_*.csv` | Dados brutos (30 REST + 30 GraphQL) |
+| `data/raw/execution_*.log` | Log de execução do runner |
+| `data/processed/results_clean.csv` | Dados limpos (sem trials inválidos) |
+| `data/processed/resultado_teste.csv` | p-valor, estatística e decisão |
+| `docs/relatorio/figures/*.png` | Boxplots, histograma e scatter |
+| `docs/relatorio/relatorio_final.pdf` | Relatório final (9 páginas) |
 
-- **RQ1:** GraphQL é mais rápido que REST?
-- **RQ2:** GraphQL retorna payloads menores que REST?
+## Commits
+
+| Autor | Quantidade | Escopo |
+|---|---|---|
+| Gustavo Costa | 12 | Estrutura, desenho experimental, scripts, dados, README |
+| Érica Alves | 8 | Análise estatística, dashboard, seções LaTeX, PDF |
+
+## Tags
+
+- `v1.0-entrega` — Versão final entregue
