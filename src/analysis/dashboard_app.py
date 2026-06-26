@@ -124,6 +124,9 @@ def card(rotulo, valor, cor=""):
 
 def fmt_p(p):
     return f"{p:.6f}" if p >= 0.001 else "< 0,001"
+
+
+def main():
     st.set_page_config(page_title="GraphQL vs REST", layout="wide", initial_sidebar_state="collapsed")
 
     df = load_data()
@@ -135,8 +138,7 @@ def fmt_p(p):
     gql_b = df[df["tratamento"] == "GraphQL"]["bytes"]
 
     reducao_t = (rest_t.mean() - gql_t.mean()) / rest_t.mean() * 100
-    p_t = testes["RQ1 (tempo)"][2]
-    p_b = testes["RQ2 (bytes)"][2]
+    reducao_b = (rest_b.mean() - gql_b.mean()) / rest_b.mean() * 100
 
     st.markdown("""
     <style>
