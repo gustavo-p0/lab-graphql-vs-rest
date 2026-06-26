@@ -2,18 +2,19 @@
 
 \subsection{Interpretação dos Resultados}
 
-Para RQ1, GraphQL apresentou menor tempo de resposta médio (424,90 ms)
-em comparação com REST (953,75 ms). O teste de Wilcoxon-Mann-Whitney
+Para RQ1, GraphQL apresentou menor tempo de resposta médio (462,76 ms)
+em comparação com REST (651,58 ms). O teste de Wilcoxon-Mann-Whitney
 rejeitou $H_0$ ($p < 0,001$), indicando que GraphQL é significativamente
 mais rápido que REST para a query analisada. Uma possível explicação é que
-a API REST do GitHub retorna um objeto completo do repositório com dezenas
-de campos, enquanto a query GraphQL seleciona apenas três campos,
-reduzindo o tempo de serialização e transferência.
+a API REST do GitHub retorna o objeto completo do repositório com dezenas
+de campos independentemente do repositório consultado, enquanto a query
+GraphQL seleciona apenas três campos, reduzindo o tempo de serialização
+e transferência.
 
 Para RQ2, GraphQL apresentou payloads significativamente menores
-($p < 0,001$), com todas as respostas em exatos 82 bytes contra 6035 bytes
-do REST. Isso confirma a vantagem fundamental do GraphQL: o cliente
-especifica exatamente os campos desejados.
+($p < 0,001$), com mediana de 82 bytes (variação de 81 a 87)
+contra 6277 bytes do REST. Isso confirma a vantagem fundamental do
+GraphQL: o cliente especifica exatamente os campos desejados.
 
 \subsection{Ameaças à Validade}
 
