@@ -25,7 +25,7 @@ def load_resultados():
 
 
 def calc_metricas(df):
-    return df.groupby("tratamento")["tempo_ms", "bytes"].describe().round(2)
+    return df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
 
 
 def calc_teste(df):
