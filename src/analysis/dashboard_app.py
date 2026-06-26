@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import scipy.stats as stats
 import seaborn as sns
@@ -56,7 +55,7 @@ def _estilo_grafico():
 
 def plot_boxplot_tempo(df):
     _estilo_grafico()
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
     sns.boxplot(data=df, x="tratamento", y="tempo_ms", ax=ax, width=0.5)
     medians = df.groupby("tratamento")["tempo_ms"].median()
     for i, t in enumerate(["REST", "GraphQL"]):
@@ -70,7 +69,7 @@ def plot_boxplot_tempo(df):
 
 def plot_boxplot_bytes(df):
     _estilo_grafico()
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
     sns.boxplot(data=df, x="tratamento", y="bytes", ax=ax, width=0.5)
     medians = df.groupby("tratamento")["bytes"].median()
     for i, t in enumerate(["REST", "GraphQL"]):
@@ -84,7 +83,7 @@ def plot_boxplot_bytes(df):
 
 def plot_histograma(df):
     _estilo_grafico()
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
     for t in ["REST", "GraphQL"]:
         subset = df[df["tratamento"] == t]
         sns.histplot(subset["tempo_ms"], label=t, alpha=0.5, bins=10, ax=ax)
@@ -97,7 +96,7 @@ def plot_histograma(df):
 
 def plot_scatter(df):
     _estilo_grafico()
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
     sns.scatterplot(data=df, x="trial_id", y="tempo_ms",
                     hue="tratamento", style="tratamento",
                     s=80, ax=ax)
@@ -167,7 +166,7 @@ def main():
     with col1:
         st.markdown("""
         <h2 style="font-size:22px;font-weight:600;margin-bottom:8px;">
-            RQ1 — Tempo de Resposta
+            RQ1 - Tempo de Resposta
         </h2>
         """, unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
@@ -187,7 +186,7 @@ def main():
     with col2:
         st.markdown("""
         <h2 style="font-size:22px;font-weight:600;margin-bottom:8px;">
-            RQ2 — Tamanho do Payload
+            RQ2 - Tamanho do Payload
         </h2>
         """, unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
@@ -211,18 +210,28 @@ def main():
     </h2>
     """, unsafe_allow_html=True)
 
-    v1, v2 = st.columns(2)
-    with v1:
+    g1, g2 = st.columns(2)
+    with g1:
         st.pyplot(plot_histograma(df))
-    with v2:
+    with g2:
         st.pyplot(plot_scatter(df))
 
-    with st.expander("Dados Brutos"):
-        st.dataframe(df, use_container_width=True, hide_index=True)
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:22px;font-weight:600;margin-bottom:12px;">
+        Dados Brutos
+    </h2>
+    """, unsafe_allow_html=True)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
-    with st.expander("Estatisticas Descritivas Completas"):
-        desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
-        st.dataframe(desc, use_container_width=True)
+    st.markdown("""
+    <hr style="margin:24px 0 16px 0;">
+    <h2 style="font-size:22px;font-weight:600;margin-bottom:12px;">
+        Estatisticas Descritivas Completas
+    </h2>
+    """, unsafe_allow_html=True)
+    desc = df.groupby("tratamento")[["tempo_ms", "bytes"]].describe().round(2)
+    st.dataframe(desc, use_container_width=True)
 
 
 if __name__ == "__main__":
