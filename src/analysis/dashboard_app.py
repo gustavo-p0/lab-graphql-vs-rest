@@ -199,11 +199,8 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            Cada caixa representa a distribuicao dos tempos de resposta: a linha
-            no meio e a mediana (valor central), as bordas sao o primeiro e
-            terceiro quartis (25% e 75% dos dados), e os tracos mostram os
-            valores extremos. A mediana do GraphQL e 433 ms, a do REST e
-            608 ms. O REST chega a levar ate 1.057 ms, enquanto o GraphQL
+            A mediana do GraphQL e 433 ms, a do REST e 608 ms.
+            O REST chega a levar ate 1.057 ms, enquanto o GraphQL
             no maximo levou 624 ms. GraphQL foi mais rapido na maioria
             das requisicoes.
         </div>
@@ -237,14 +234,11 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            Medimos o tamanho dos dados que cada tecnologia devolveu. Cada caixa
-            representa a distribuicao dos valores: a linha no meio e a mediana
-            (valor central), as bordas sao o primeiro e terceiro quartis (25% e
-            75% dos dados), e os tracos mostram os valores extremos. A mediana
-            do GraphQL e 82 bytes, a do REST e 6.277 bytes. O REST chega a
-            devolver ate 6.822 bytes, enquanto o GraphQL no maximo entregou
-            87 bytes. A diferenca e enorme porque REST retorna o objeto completo
-            do repositorio, GraphQL so os tres campos pedidos.
+            A mediana do GraphQL e 82 bytes, a do REST e 6.277 bytes.
+            O REST chega a devolver ate 6.822 bytes, enquanto o GraphQL
+            no maximo entregou 87 bytes. A diferenca e enorme porque REST
+            retorna o objeto completo do repositorio, GraphQL so os tres
+            campos pedidos.
         </div>
         """, unsafe_allow_html=True)
 
