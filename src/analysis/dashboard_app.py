@@ -177,7 +177,7 @@ def main():
     <div style="background:#eef2f7;border-radius:8px;padding:16px 20px;font-size:16px;color:#333;line-height:1.7;">
         <ul style="margin:4px 0;padding-left:20px;">
             <li>Testamos apenas a API do GitHub.</li>
-            <li>60 trials (30 por grupo) foram suficientes para p &lt; 0,001.</li>
+            <li>60 trials foram suficientes para p &lt; 0,001.</li>
             <li>Medimos somente consultas (GET/query).</li>
             <li>GraphQL pediu 3 campos — quanto mais campos, menor a economia.</li>
             <li>Latência da internet varia, mas intercalação REST/GraphQL iguala o efeito.</li>
