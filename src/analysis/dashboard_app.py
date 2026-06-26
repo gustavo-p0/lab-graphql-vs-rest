@@ -210,30 +210,29 @@ def main():
     """, unsafe_allow_html=True)
 
     n_b, st_b, p_b = testes["RQ2 (bytes)"]
-    c1, c2 = st.columns(2)
 
-    with c1:
-        col_a, col_b, col_c = st.columns(3, gap="small")
-        col_a.markdown(card("REST (media)", f"{rest_b.mean():.0f} B"), unsafe_allow_html=True)
-        col_b.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#2ecc71"), unsafe_allow_html=True)
-        col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
-        st.markdown(f"""
-        <p style="font-size:14px;color:#444;">
-            <b>Teste:</b> {n_b} | p = {fmt_p(p_b)} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
-        </p>
-        """, unsafe_allow_html=True)
-        st.markdown("""
-        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            A mediana do GraphQL e 82 bytes, a do REST e 6.277 bytes.
-            O REST chega a devolver ate 6.822 bytes, enquanto o GraphQL
-            no maximo entregou 87 bytes. A diferenca e enorme porque REST
-            retorna o objeto completo do repositorio, GraphQL so os tres
-            campos pedidos.
-        </div>
-        """, unsafe_allow_html=True)
+    col_a, col_b, col_c = st.columns(3, gap="small")
+    col_a.markdown(card("REST (media)", f"{rest_b.mean():.0f} B"), unsafe_allow_html=True)
+    col_b.markdown(card("GraphQL (media)", f"{gql_b.mean():.0f} B", "#2ecc71"), unsafe_allow_html=True)
+    col_c.markdown(card("Reducao", f"-{reducao_b:.1f}%", "#2ecc71"), unsafe_allow_html=True)
 
-    with c2:
-        st.pyplot(plot_boxplot_bytes(df))
+    st.markdown(f"""
+    <p style="font-size:14px;color:#444;">
+        <b>Teste:</b> {n_b} | p = {fmt_p(p_b)} | Rejeita H<sub>0</sub>: {"Sim" if p_b < 0.05 else "Nao"}
+    </p>
+    """, unsafe_allow_html=True)
+
+    st.pyplot(plot_boxplot_bytes(df))
+
+    st.markdown("""
+    <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+        A mediana do GraphQL e 82 bytes, a do REST e 6.277 bytes.
+        O REST chega a devolver ate 6.822 bytes, enquanto o GraphQL
+        no maximo entregou 87 bytes. A diferenca e enorme porque REST
+        retorna o objeto completo do repositorio, GraphQL so os tres
+        campos pedidos.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
