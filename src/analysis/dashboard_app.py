@@ -199,10 +199,13 @@ def main():
         """, unsafe_allow_html=True)
         st.markdown("""
         <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            As caixas mostram o tempo que cada tecnologia levou para responder.
-            A linha no meio e a mediana (valor do meio). Quanto mais baixa a caixa,
-            mais rapido. A caixa do GraphQL (azul) esta mais baixa que a do REST
-            (laranja). GraphQL respondeu mais rapido na maioria das vezes.
+            Cada caixa representa a distribuicao dos tempos de resposta: a linha
+            no meio e a mediana (valor central), as bordas sao o primeiro e
+            terceiro quartis (25% e 75% dos dados), e os tracos mostram os
+            valores extremos. A mediana do GraphQL e 433 ms, a do REST e
+            608 ms. O REST chega a levar ate 1.057 ms, enquanto o GraphQL
+            no maximo levou 624 ms. GraphQL foi mais rapido na maioria
+            das requisicoes.
         </div>
         """, unsafe_allow_html=True)
 
