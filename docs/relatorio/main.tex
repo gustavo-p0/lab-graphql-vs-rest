@@ -1,0 +1,52 @@
+\documentclass[12pt, a4paper]{article}
+
+% --- Pacotes obrigatórios ---
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{microtype}
+
+\geometry{margin=2.5cm}
+
+\title{
+  \textbf{GraphQL vs REST:}\\
+  Um Experimento Controlado sobre Desempenho e Tamanho de Respostas\\[0.5em]
+  \large Laboratório de Experimentação de Software
+}
+\author{
+  Gustavo Pimentel Carvalho Costa\thanks{\texttt{83771792+gustavo-p0@users.noreply.github.com}}
+  \and
+  Érica Alves dos Santos\thanks{\texttt{erica.asnt@hotmail.com}}
+}
+\date{\today \\ Versão 1.0}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\input{sections/02_resumo}
+\input{sections/03_introducao}
+\input{sections/04_metodologia}
+\input{sections/05_ambiente}
+\input{sections/06_resultados}
+\input{sections/07_discussao}
+\input{sections/08_conclusao}
+\input{sections/09_apendices}
+
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}
