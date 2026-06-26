@@ -244,29 +244,25 @@ def main():
     </p>
     """, unsafe_allow_html=True)
 
-    g1, g2 = st.columns(2)
+    st.pyplot(plot_histograma(df))
+    st.markdown("""
+    <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+        Quantas vezes cada tempo de resposta aconteceu. Barras mais altas = mais
+        repeticoes. As barras azuis (GraphQL) concentram-se mais a esquerda
+        (tempos menores). As laranjas (REST) espalham-se para a direita
+        (tempos maiores). Confirma que GraphQL e mais rapido.
+    </div>
+    """, unsafe_allow_html=True)
 
-    with g1:
-        st.pyplot(plot_histograma(df))
-        st.markdown("""
-        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            Quantas vezes cada tempo de resposta aconteceu. Barras mais altas = mais
-            repeticoes. As barras azuis (GraphQL) concentram-se mais a esquerda
-            (tempos menores). As laranjas (REST) espalham-se para a direita
-            (tempos maiores). Confirma que GraphQL e mais rapido.
-        </div>
-        """, unsafe_allow_html=True)
-
-    with g2:
-        st.pyplot(plot_scatter(df))
-        st.markdown("""
-        <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
-            Cada ponto e uma requisicao. A posicao mostra a ordem em que foi feita
-            e quanto tempo levou. Os pontos azuis (GraphQL) ficam quase sempre
-            abaixo dos laranjas (REST) do inicio ao fim. A vantagem do GraphQL
-            foi consistente.
-        </div>
-        """, unsafe_allow_html=True)
+    st.pyplot(plot_scatter(df))
+    st.markdown("""
+    <div style="background:#eef2f7;border-radius:8px;padding:10px 12px;font-size:14px;color:#333;line-height:1.5;">
+        Cada ponto e uma requisicao. A posicao mostra a ordem em que foi feita
+        e quanto tempo levou. Os pontos azuis (GraphQL) ficam quase sempre
+        abaixo dos laranjas (REST) do inicio ao fim. A vantagem do GraphQL
+        foi consistente.
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
     <hr style="margin:24px 0 16px 0;">
