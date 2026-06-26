@@ -82,10 +82,10 @@ def plot_boxplot_bytes(df):
     ax_gql.set_ylim(0, gql.max() * 1.15)
     med_rest = rest.median()
     med_gql = gql.median()
-    ax_rest.text(0, med_rest + rest.max() * 0.03, f"{int(med_rest)} B",
-                 ha="center", va="bottom", fontweight="bold", fontsize=12)
-    ax_gql.text(0, med_gql + gql.max() * 0.03, f"{int(med_gql)} B",
-                ha="center", va="bottom", fontweight="bold", fontsize=12)
+    ax_rest.text(0, ax_rest.get_ylim()[1] * 0.88, f"{int(med_rest)} B",
+                 ha="center", va="top", fontweight="bold", fontsize=12, color="#333")
+    ax_gql.text(0, ax_gql.get_ylim()[1] * 0.88, f"{int(med_gql)} B",
+                ha="center", va="top", fontweight="bold", fontsize=12, color="#333")
     return fig
 
 
